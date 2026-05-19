@@ -1,0 +1,6 @@
+{
+  "name": "markov-hedge-fund-method",
+  "description": "Markov regime detection for any asset. Labels each day Bull/Bear/Sideways from a rolling-return rule, builds the maximum-likelihood transition matrix, forecasts n-step ahead via Chapman-Kolmogorov, solves the stationary distribution, and runs a no-lookahead walk-forward backtest reporting Sharpe and max drawdown. Composes into any trading agent on any asset as a confirmation, signal, or tail-risk layer. Optional Hidden Markov Model upgrade. Framework by Roan (@RohOnChain).",
+  "version": "1.0.0",
+  "author": { "name": "Lewis Jackson" }
+}
