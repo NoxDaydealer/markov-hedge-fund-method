@@ -1,0 +1,66 @@
+{
+  "BTCUSDT": {
+    "train": {
+      "buy_hold_return": -0.0600648384444219,
+      "bars": 14112
+    },
+    "test": {
+      "buy_hold_return": -0.003822559822804772,
+      "bars": 6047
+    },
+    "vwap_volume_rsi_reversion": {
+      "best_by_test_net_total_return": 0.0007839749406848,
+      "best_by_test_test_trades": 3,
+      "selected_test_net_total_return": -0.03905004378157284,
+      "selected_test_gross_total_return": -0.008566947781377565,
+      "selected_test_trades": 26,
+      "random_train_median_net_return": -0.0773049004509681,
+      "random_train_p95_net_return": -0.07170490354576314,
+      "random_test_median_net_return": -0.03070180283193108,
+      "random_test_p95_net_return": -0.02727820098792273
+    },
+    "bb_vwap_momentum_breakout": {
+      "best_by_test_net_total_return": -0.0058925535228132,
+      "best_by_test_test_trades": 9,
+      "selected_test_net_total_return": -0.03603511306502527,
+      "selected_test_gross_total_return": 0.0017220677132294693,
+      "selected_test_trades": 32,
+      "random_train_median_net_return": -0.1035801985840688,
+      "random_train_p95_net_return": -0.09727108487216109,
+      "random_test_median_net_return": -0.03777397210231803,
+      "random_test_p95_net_return": -0.0338356963900748
+    }
+  },
+  "ETHUSDT": {
+    "train": {
+      "buy_hold_return": -0.1031038023261781,
+      "bars": 14112
+    },
+    "test": {
+      "buy_hold_return": -0.01362002796257522,
+      "bars": 6047
+    },
+    "vwap_volume_rsi_reversion": {
+      "best_by_test_net_total_return": 0.0020079362751708,
+      "best_by_test_test_trades": 12,
+      "selected_test_net_total_return": -0.01838603647574799,
+      "selected_test_gross_total_return": 0.015158791153490059,
+      "selected_test_trades": 28,
+      "random_train_median_net_return": -0.067129124665675,
+      "random_train_p95_net_return": -0.06012504802554452,
+      "random_test_median_net_return": -0.03303757365034027,
+      "random_test_p95_net_return": -0.028198128443693706
+    },
+    "bb_vwap_momentum_breakout": {
+      "best_by_test_net_total_return": -0.0221900986096702,
+      "best_by_test_test_trades": 24,
+      "selected_test_net_total_return": -0.0562449920650524,
+      "selected_test_gross_total_return": 0.002147091738241791,
+      "selected_test_trades": 50,
+      "random_train_median_net_return": -0.10014412848275922,
+      "random_train_p95_net_return": -0.09196931058811803,
+      "random_test_median_net_return": -0.058260699875505195,
+      "random_test_p95_net_return": -0.05150088240639544
+    }
+  }
+}

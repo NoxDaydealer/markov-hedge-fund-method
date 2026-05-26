@@ -1,0 +1,37 @@
+# Trading Hub daily Markov regime scan universe.
+# Research/paper-trading only. This file controls report inputs; it does not
+# enable real-money execution or broker integration.
+version: 1
+assets:
+  - symbol: BTC-USD
+    display_name: BTC-USD
+    asset_class: crypto
+    data_source: yfinance
+    enabled: true
+    min_history_rows: 252
+    report_group: core
+    notes: Current default daily report asset.
+  - symbol: ETH-USD
+    display_name: ETH-USD
+    asset_class: crypto
+    data_source: yfinance
+    enabled: true
+    min_history_rows: 252
+    report_group: core
+    notes: Current default daily report asset.
+  - symbol: SPY
+    display_name: SPY
+    asset_class: equity_index_etf
+    data_source: yfinance
+    enabled: true
+    min_history_rows: 252
+    report_group: core
+    notes: Current default daily report asset.
+  - symbol: QQQ
+    display_name: QQQ
+    asset_class: equity_index_etf
+    data_source: yfinance
+    enabled: true
+    min_history_rows: 252
+    report_group: core
+    notes: Current default daily report asset.

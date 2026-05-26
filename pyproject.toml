@@ -1,0 +1,32 @@
+[project]
+name = "markov-strategy"
+version = "0.1.0"
+description = "Markov Paper Trading Hub strategy adapters and regime tools."
+requires-python = ">=3.10"
+dependencies = [
+  "numpy",
+  "pandas",
+  "pyyaml",
+  "websockets",
+]
+
+[project.optional-dependencies]
+yfinance = [
+  "yfinance",
+]
+
+[project.scripts]
+combo-fib-liquidity-backtest = "trading_hub.backtest_report:main"
+bollinger-vwap-momentum-backtest = "trading_hub.backtest_report:main"
+bybit-public-collector = "trading_hub.bybit_public_collector:main"
+vwap-volume-reversion-backtest = "trading_hub.vwap_volume_reversion_backtest:main"
+vwap-volume-rsi-reversion-backtest = "trading_hub.vwap_volume_rsi_reversion_backtest:main"
+
+[dependency-groups]
+dev = [
+  "pytest",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

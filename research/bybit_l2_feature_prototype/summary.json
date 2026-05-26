@@ -1,0 +1,413 @@
+{
+  "by_symbol": {
+    "BTCUSDT": {
+      "aggressive_flow_notional_imbalance": {
+        "max": 1.0,
+        "mean": -0.08318061668525774,
+        "median": 0.0,
+        "min": -1.0,
+        "stdev": 0.6704807133312347
+      },
+      "aggressive_flow_qty_imbalance": {
+        "max": 1.0,
+        "mean": -0.08317817861877419,
+        "median": 0.0,
+        "min": -1.0,
+        "stdev": 0.6704807349473824
+      },
+      "microprice_top1_edge_bps": {
+        "max": 0.006453759838449164,
+        "mean": 0.002248169694656514,
+        "median": 0.003559173089372091,
+        "min": -0.004082434226825909,
+        "stdev": 0.002950984000621525
+      },
+      "new_trade_count": {
+        "max": 100.0,
+        "mean": 18.4,
+        "median": 2.0,
+        "min": 0.0,
+        "stdev": 33.65471735136101
+      },
+      "rows": 20,
+      "spread_bps": {
+        "max": 0.012976235971011187,
+        "mean": 0.01297396676380653,
+        "median": 0.01297450186097442,
+        "min": 0.01297206142346591,
+        "stdev": 1.5913576469156987e-06
+      },
+      "time_end": "2026-05-24T23:51:10.843000+00:00",
+      "time_start": "2026-05-24T23:50:56.644000+00:00",
+      "top_n": {
+        "1": {
+          "imbalance_notional": {
+            "max": 0.994704444270076,
+            "mean": 0.34652206924710593,
+            "median": 0.5486176629231038,
+            "min": -0.6294109135271978,
+            "stdev": 0.454890110754766
+          },
+          "imbalance_qty": {
+            "max": 0.994704451123515,
+            "mean": 0.3465225058040597,
+            "median": 0.5486181136916883,
+            "min": -0.6294105218677372,
+            "stdev": 0.45489000064176277
+          },
+          "orderbook_delta_imbalance": {
+            "max": 1.0,
+            "mean": -0.21038317324924688,
+            "median": -0.6964692899345304,
+            "min": -1.0,
+            "stdev": 0.8668001345900858
+          },
+          "pressure_edge_bps": {
+            "max": 0.006453759838449164,
+            "mean": 0.0022481696947509234,
+            "median": 0.003559173089372091,
+            "min": -0.004082434226825909,
+            "stdev": 0.002950984000704533
+          }
+        },
+        "10": {
+          "imbalance_notional": {
+            "max": 0.9746051230647921,
+            "mean": 0.40428656580468203,
+            "median": 0.5624052136240256,
+            "min": -0.5190802114131424,
+            "stdev": 0.4207268549513192
+          },
+          "imbalance_qty": {
+            "max": 0.9746058322868704,
+            "mean": 0.404288554039862,
+            "median": 0.5624088227708763,
+            "min": -0.5190771960958297,
+            "stdev": 0.4207261421004722
+          },
+          "orderbook_delta_imbalance": {
+            "max": 1.0,
+            "mean": -0.1599947223171332,
+            "median": -0.368402714965144,
+            "min": -1.0,
+            "stdev": 0.8614421054573357
+          },
+          "pressure_edge_bps": {
+            "max": 0.2706203944990047,
+            "mean": 0.012269518472258007,
+            "median": 0.004643888874430671,
+            "min": -0.05623104247239641,
+            "stdev": 0.06421507299063145
+          }
+        },
+        "25": {
+          "imbalance_notional": {
+            "max": 0.8054551104745606,
+            "mean": 0.43253281514911335,
+            "median": 0.4791758527328467,
+            "min": -0.3855747786815949,
+            "stdev": 0.35216830917037284
+          },
+          "imbalance_qty": {
+            "max": 0.8054574638844303,
+            "mean": 0.43254117853674157,
+            "median": 0.4791850140333311,
+            "min": -0.3855659121171769,
+            "stdev": 0.352166259063866
+          },
+          "orderbook_delta_imbalance": {
+            "max": 1.0,
+            "mean": -0.03975097553938085,
+            "median": 0.021739130434808632,
+            "min": -1.0,
+            "stdev": 0.8469198200450725
+          },
+          "pressure_edge_bps": {
+            "max": 0.6511171951566389,
+            "mean": 0.04285154334230624,
+            "median": 0.015363149888693561,
+            "min": -0.1513933280791921,
+            "stdev": 0.15900372220658848
+          }
+        },
+        "5": {
+          "imbalance_notional": {
+            "max": 0.9849129490074575,
+            "mean": 0.37604981025412354,
+            "median": 0.5593862353430559,
+            "min": -0.6181002840038481,
+            "stdev": 0.43922901679490156
+          },
+          "imbalance_qty": {
+            "max": 0.9849131796185596,
+            "mean": 0.3760506422820322,
+            "median": 0.5593868800187224,
+            "min": -0.6180996860883546,
+            "stdev": 0.4392287300088751
+          },
+          "orderbook_delta_imbalance": {
+            "max": 1.0,
+            "mean": -0.07131128231137591,
+            "median": -0.09319799375950874,
+            "min": -1.0,
+            "stdev": 0.8028901501175512
+          },
+          "pressure_edge_bps": {
+            "max": 0.14635105219980005,
+            "mean": 0.006977723298861115,
+            "median": 0.003249757598395588,
+            "min": -0.022010268300742784,
+            "stdev": 0.03275376363247592
+          }
+        },
+        "50": {
+          "imbalance_notional": {
+            "max": 0.5795302795677848,
+            "mean": 0.2097154283085499,
+            "median": 0.3311858174877989,
+            "min": -0.4047185114838064,
+            "stdev": 0.3257093849179079
+          },
+          "imbalance_qty": {
+            "max": 0.5795651593970925,
+            "mean": 0.20975392752963118,
+            "median": 0.3312340814405853,
+            "min": -0.40468418216968266,
+            "stdev": 0.32570324689463975
+          },
+          "orderbook_delta_imbalance": {
+            "max": 1.0,
+            "mean": 0.04991986072877452,
+            "median": 0.43270506626015975,
+            "min": -1.0,
+            "stdev": 0.8897714372610365
+          },
+          "pressure_edge_bps": {
+            "max": 0.7157001866446973,
+            "mean": 0.2409426140594298,
+            "median": 0.28852906792544764,
+            "min": -0.2797457674080698,
+            "stdev": 0.24778916998629777
+          }
+        }
+      }
+    },
+    "ETHUSDT": {
+      "aggressive_flow_notional_imbalance": {
+        "max": 1.0,
+        "mean": 0.020606496391498676,
+        "median": 0.0,
+        "min": -1.0,
+        "stdev": 0.7585180079423782
+      },
+      "aggressive_flow_qty_imbalance": {
+        "max": 1.0,
+        "mean": 0.020605929139551716,
+        "median": 0.0,
+        "min": -1.0,
+        "stdev": 0.7585184247767383
+      },
+      "microprice_top1_edge_bps": {
+        "max": 0.023775369612464924,
+        "mean": 0.017167330468382012,
+        "median": 0.021479806125707136,
+        "min": -0.02376207733660535,
+        "stdev": 0.01140068205451843
+      },
+      "new_trade_count": {
+        "max": 100.0,
+        "mean": 13.75,
+        "median": 3.5,
+        "min": 0.0,
+        "stdev": 28.080019586887754
+      },
+      "rows": 20,
+      "spread_bps": {
+        "max": 0.04757951131187789,
+        "mean": 0.04757213346036456,
+        "median": 0.047572155563816554,
+        "min": 0.047564348619174995,
+        "stdev": 6.982487213636248e-06
+      },
+      "time_end": "2026-05-24T23:51:10.992000+00:00",
+      "time_start": "2026-05-24T23:50:57.192000+00:00",
+      "top_n": {
+        "1": {
+          "imbalance_notional": {
+            "max": 0.9996900971780934,
+            "mean": 0.7217464261345093,
+            "median": 0.9029010636142655,
+            "min": -0.9988793217119226,
+            "stdev": 0.4792918169102844
+          },
+          "imbalance_qty": {
+            "max": 0.9996900986519291,
+            "mean": 0.7217470192698986,
+            "median": 0.9029015025514007,
+            "min": -0.9988793163829934,
+            "stdev": 0.47929163059358687
+          },
+          "orderbook_delta_imbalance": {
+            "max": 1.0,
+            "mean": 0.15177865942960325,
+            "median": 0.738686520428387,
+            "min": -1.0,
+            "stdev": 0.9162865188887702
+          },
+          "pressure_edge_bps": {
+            "max": 0.023775369612464924,
+            "mean": 0.017167330468382012,
+            "median": 0.021479806125707136,
+            "min": -0.02376207733660535,
+            "stdev": 0.01140068205451843
+          }
+        },
+        "10": {
+          "imbalance_notional": {
+            "max": 0.9979515462623094,
+            "mean": 0.7470163404899168,
+            "median": 0.8947720549651488,
+            "min": -0.9919232516182044,
+            "stdev": 0.43088425810466185
+          },
+          "imbalance_qty": {
+            "max": 0.9979516591560836,
+            "mean": 0.7470191497473501,
+            "median": 0.8947736002793621,
+            "min": -0.9919229215946462,
+            "stdev": 0.43088322929946077
+          },
+          "orderbook_delta_imbalance": {
+            "max": 1.0,
+            "mean": 0.07953154877471098,
+            "median": 0.45849960095770154,
+            "min": -1.0,
+            "stdev": 0.9321469041946535
+          },
+          "pressure_edge_bps": {
+            "max": 0.575758048359503,
+            "mean": 0.1630116631460105,
+            "median": 0.0633961817545371,
+            "min": -0.35585391562235597,
+            "stdev": 0.2428769893122996
+          }
+        },
+        "25": {
+          "imbalance_notional": {
+            "max": 0.966548311219249,
+            "mean": 0.601305812812833,
+            "median": 0.6114018748651513,
+            "min": -0.5892392476089438,
+            "stdev": 0.3167426424566993
+          },
+          "imbalance_qty": {
+            "max": 0.9665532257474293,
+            "mean": 0.6013438544512985,
+            "median": 0.6114345591435535,
+            "min": -0.5891910985517484,
+            "stdev": 0.3167353184761245
+          },
+          "orderbook_delta_imbalance": {
+            "max": 1.0,
+            "mean": 0.01580350774047265,
+            "median": 0.014090520922289011,
+            "min": -1.0,
+            "stdev": 0.9342801375471902
+          },
+          "pressure_edge_bps": {
+            "max": 1.2431545519216425,
+            "mean": 0.6667229639441721,
+            "median": 0.7524093819978422,
+            "min": -0.6661013697125815,
+            "stdev": 0.4246710551164985
+          }
+        },
+        "5": {
+          "imbalance_notional": {
+            "max": 0.9993675230671104,
+            "mean": 0.7235399812717157,
+            "median": 0.9022166456182402,
+            "min": -0.9979899853745456,
+            "stdev": 0.478196256147454
+          },
+          "imbalance_qty": {
+            "max": 0.9993675389358843,
+            "mean": 0.72354084748251,
+            "median": 0.9022173129273554,
+            "min": -0.9979899497487439,
+            "stdev": 0.47819613794607907
+          },
+          "orderbook_delta_imbalance": {
+            "max": 1.0,
+            "mean": 0.17914737523197666,
+            "median": 0.9697468012554167,
+            "min": -1.0,
+            "stdev": 0.9254257143930874
+          },
+          "pressure_edge_bps": {
+            "max": 0.3790984987491811,
+            "mean": 0.07096221365932379,
+            "median": 0.036071937452284035,
+            "min": -0.13555742560560874,
+            "stdev": 0.10651528362361691
+          }
+        },
+        "50": {
+          "imbalance_notional": {
+            "max": 0.6362845231898795,
+            "mean": 0.2943705871700456,
+            "median": 0.306046262047698,
+            "min": -0.3459158800592114,
+            "stdev": 0.18577644691719214
+          },
+          "imbalance_qty": {
+            "max": 0.6363750378863097,
+            "mean": 0.29450754967250553,
+            "median": 0.30618021435119036,
+            "min": -0.34577905936163855,
+            "stdev": 0.1857684824748518
+          },
+          "orderbook_delta_imbalance": {
+            "max": 1.0,
+            "mean": -0.09770377891094437,
+            "median": -0.4103454441538861,
+            "min": -1.0,
+            "stdev": 0.8966405008087375
+          },
+          "pressure_edge_bps": {
+            "max": 1.6446453110690216,
+            "mean": 0.807807054050644,
+            "median": 0.8477234281145724,
+            "min": -0.641025089117865,
+            "stdev": 0.4617466750558553
+          }
+        }
+      }
+    }
+  },
+  "category": "linear",
+  "caveats": [
+    "REST snapshots are not a lossless historical L2 stream; use websocket deltas with sequence-gap checks before live-like paper reporting.",
+    "Microprice, top-N pressure, and imbalance columns are predictive features only, not executable fill prices.",
+    "Do not assume fills at mid-price; conservative simulation should cross spread for taker fills or model maker queue priority, latency, cancels, and partial fills.",
+    "Bybit recent-trade side is treated as aggressor/taker-side proxy here; confirm endpoint semantics against websocket trade docs before using as alpha.",
+    "Orderbook delta imbalance compares sampled depth snapshots; it misses within-interval add/cancel/trade events and is sensitive to polling cadence."
+  ],
+  "interval_seconds": 0.5,
+  "orderbook_limit": 50,
+  "overall_verdict": "Dataset generated for feature diagnostics only; not a strategy and not ready for live orders.",
+  "samples_collected_rows": 40,
+  "samples_requested": 20,
+  "scope": "Bybit public REST L2 orderbook/trade-flow feature prototype; research only, no orders.",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT"
+  ],
+  "top_ns": [
+    1,
+    5,
+    10,
+    25,
+    50
+  ]
+}

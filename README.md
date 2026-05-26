@@ -82,6 +82,126 @@ Open TradingView → Pine Editor → paste the `.pine` → Save → Add to Chart
 
 ---
 
+## Markov Paper Trading Hub adapter
+
+This repo also includes the first paper-only strategy adapter:
+`trading_hub.strategies.combo_fib_liquidity.ComboFibLiquidityAdapter`.
+It accepts caller-supplied OHLCV `pandas.DataFrame` data or a CSV path and
+returns local paper signals only — no broker/API keys, live orders, or market-data
+network fetches.
+
+```python
+from trading_hub.strategies.combo_fib_liquidity import ComboFibLiquidityAdapter
+
+signals = ComboFibLiquidityAdapter(
+    lookback=20,
+    atr_period=14,
+    markov_signal=0.25,   # longs allowed for positive/neutral regime risk
+    enable_shorts=False,  # shorts are disabled by default
+).generate_signals("./ohlcv.csv")
+```
+
+Signals are generated on the setup bar and shifted into `execution_signal` on
+the next bar at the next bar open to avoid same-bar lookahead.
+
+### Bollinger VWAP Momentum v0
+
+The intraday Bollinger/VWAP momentum candidate lives at
+`trading_hub.strategies.bollinger_vwap_momentum.BollingerVwapMomentumAdapter`.
+It is also pure local/paper-only: caller-supplied OHLCV `DataFrame` or CSV in,
+next-bar execution intents out; no broker orders and no implicit market-data
+network calls.
+
+Entry requires a recent low Bollinger band-width percentile squeeze followed by
+band expansion and close breakout, price aligned with VWAP, volume expansion,
+and RSI/MACD momentum confirmation. The companion backtest exits with ATR
+trailing stop, VWAP recross, max holding-bars time stop, or end-of-data, and has
+fee/spread/slippage bps hooks.
+
+```python
+from trading_hub.strategies.bollinger_vwap_momentum import BollingerVwapMomentumAdapter
+
+signals = BollingerVwapMomentumAdapter(
+    bb_period=20,
+    bandwidth_percentile_window=100,
+    bandwidth_percentile_threshold=0.20,
+    volume_multiplier=1.5,
+    enable_shorts=False,
+).generate_signals("./intraday_ohlcv.csv")
+```
+
+```bash
+python -m trading_hub.backtest_report \
+  --strategy bollinger_vwap_momentum \
+  --csv ./intraday_ohlcv.csv \
+  --bb-period 20 \
+  --bandwidth-percentile-window 100 \
+  --fee-bps 2 --spread-bps 1 --slippage-bps 1 \
+  --output-json ./bollinger_vwap_momentum_report.json
+```
+
+### Paper backtest/report runner
+
+Run a local, paper-only report from OHLCV CSV data:
+
+```bash
+python -m trading_hub.backtest_report \
+  --csv ./ohlcv.csv \
+  --lookback 20 \
+  --atr-period 14 \
+  --markov-signal 0.25 \
+  --output-json ./combo_fib_liquidity_report.json
+```
+
+The runner computes returns only after the adapter's shifted `execution_signal`:
+entry at the execution bar open, exit at the following bar open. A final-bar
+execution is ignored because its next-bar return is not knowable without
+lookahead. The report includes trades, win rate, total/annualized return,
+Sharpe, max drawdown, and average trade return.
+
+### Shared HFT evaluator
+
+For intraday/pseudo-HFT strategy research, use `trading_hub.hft_evaluator`.
+It adds a broker-free, paper-only evaluation layer with maker/taker fees,
+spread, slippage, latency bars, max-trades/day throttles, cooldowns,
+train/validation/test walk-forward folds, no-trade/buy-hold/random/VWAP
+baselines, and metrics such as net PnL, EV/trade, trades/day, profit factor,
+max drawdown, fee-to-gross-profit, and PnL by regime. See
+[`research/hft_evaluation_framework.md`](./research/hft_evaluation_framework.md)
+for usage notes.
+
+Optional yfinance fetching is available only when explicitly requested:
+
+```bash
+python -m trading_hub.backtest_report --ticker SPY --period 1y --interval 1d
+```
+
+Install the optional dependency first if needed: `pip install .[yfinance]`.
+Unit tests use local fixture data and do not make network calls.
+
+### Bybit public market data collector
+
+The Trading Hub also includes a research-only Bybit public data collector. It
+uses no API keys and subscribes to the linear public WebSocket topics
+`publicTrade`, `kline.1`, and `orderbook.50` for BTCUSDT/ETHUSDT by default.
+Orderbook sequence gaps trigger a public REST `/v5/market/orderbook` snapshot
+resync.
+
+```bash
+python -m trading_hub.bybit_public_collector --data-dir ./data/bybit_public
+# or after installing the package:
+bybit-public-collector --data-dir ./data/bybit_public --symbol BTCUSDT --symbol ETHUSDT
+```
+
+Output layout:
+
+- `raw/<SYMBOL>.jsonl` — unmodified WebSocket events plus REST resync snapshots.
+- `normalized/trades/<SYMBOL>.jsonl` — public trades.
+- `normalized/ohlcv_1m/<SYMBOL>.jsonl` — 1-minute OHLCV klines.
+- `normalized/best_bid_ask_spread/<SYMBOL>.jsonl` — best bid/ask and spread bps.
+
+---
+
 ## Credit
 
 - **Framework:** Roan ([@RohOnChain](https://x.com/RohOnChain)) — read his original article for the underlying maths.

@@ -1,0 +1,207 @@
+{
+  "/root/trading/markov-strategy/tests/test_bollinger_vwap_momentum.py": {
+    "mtime": 1779666768.511664,
+    "ast_hash": "6f96a921b531089470c0b994fa81b61f",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_vwap_volume_reversion.py": {
+    "mtime": 1779666801.6017606,
+    "ast_hash": "d192a6a799a0d0def81375413d6fbf8c",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_intraday_markov_gate.py": {
+    "mtime": 1779666638.4872882,
+    "ast_hash": "8480575cf1f100e0a5e599a62c7d463a",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_trading_hub_config.py": {
+    "mtime": 1779625809.7925508,
+    "ast_hash": "7a5e1427bd9817ce74658391cf19bf9a",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_combo_fib_liquidity_adapter.py": {
+    "mtime": 1779645812.2733984,
+    "ast_hash": "50a87a3d8f34b8968903f0b3049a0e3c",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_bybit_l2_feature_prototype.py": {
+    "mtime": 1779666646.9333124,
+    "ast_hash": "9c74c566bd9586649bd89591e57aa836",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_bybit_public_collector.py": {
+    "mtime": 1779666687.7174294,
+    "ast_hash": "cd466b612d5159e1b7733c30802276a9",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_vwap_volume_rsi_reversion.py": {
+    "mtime": 1779667887.1902213,
+    "ast_hash": "d918c7744762b28b715645dcab3f7cf9",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_combo_fib_liquidity_backtest.py": {
+    "mtime": 1779646427.460478,
+    "ast_hash": "4885480bd0872824b1ea3ef2458317b4",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_hft_evaluator.py": {
+    "mtime": 1779666669.3243766,
+    "ast_hash": "f913072f549678e55ec4aa8ab7c1b2aa",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/research/bybit_intraday_strategy_sprint.py": {
+    "mtime": 1779666382.2965748,
+    "ast_hash": "4ae2bf81566c8f04a14f8c4a3d2ab606",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/research/nasdaq_combo_fib_liquidity_sweep.py": {
+    "mtime": 1779662685.1615224,
+    "ast_hash": "4ea192a6a6990e019c62fad8f814a266",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/research/bybit_l2_feature_prototype.py": {
+    "mtime": 1779666650.8353236,
+    "ast_hash": "36e45b49c1b533289434d295993c8221",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/research/nasdaq_combo_fib_liquidity_sweep/summary.json": {
+    "mtime": 1779662732.710634,
+    "ast_hash": "4eabde38ba0ac0cab1a5ec52920396d5",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/research/bybit_l2_feature_prototype/summary.json": {
+    "mtime": 1779666671.4603827,
+    "ast_hash": "c4acd59bdb65e83adfa32e742d4f0aac",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/research/bybit_intraday_strategy_sprint/baseline_diagnostics.json": {
+    "mtime": 1779666377.555562,
+    "ast_hash": "7d8bc8ad8ba010e8242d14c438961947",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/research/bybit_intraday_strategy_sprint/summary.json": {
+    "mtime": 1779666334.0034459,
+    "ast_hash": "7b0aaed85c8591a25d6d49027faed8ba",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.claude-plugin/marketplace.json": {
+    "mtime": 1779487405.1552582,
+    "ast_hash": "06cc5ffd1f08cce7334d28e407a9de28",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.claude-plugin/plugin.json": {
+    "mtime": 1779487405.1552582,
+    "ast_hash": "2fad27c931b533ef9a606516bad648d4",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/hft_evaluator.py": {
+    "mtime": 1779666632.0882697,
+    "ast_hash": "6dd2535a5eda854c4398344e6b1aa719",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/__init__.py": {
+    "mtime": 1779645097.5349853,
+    "ast_hash": "217ecd6f621860d62912a2c223d6fba9",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/vwap_volume_rsi_reversion_backtest.py": {
+    "mtime": 1779667968.7902527,
+    "ast_hash": "feeb7de76e136f6a590a390f7eee3460",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/vwap_volume_reversion_backtest.py": {
+    "mtime": 1779666791.3427305,
+    "ast_hash": "6fc3d947aa6933efb5b8d6591c4dcdde",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/bybit_public_collector.py": {
+    "mtime": 1779666750.1366103,
+    "ast_hash": "7f13ee9252908281788d43286b4b9310",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/backtest_report.py": {
+    "mtime": 1779666709.027491,
+    "ast_hash": "35f5be8dea4a5a69cb918cbb996df5a0",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/strategies/bollinger_vwap_momentum.py": {
+    "mtime": 1779666718.0095172,
+    "ast_hash": "6aa119a54ab91db08fa24bd304a387af",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/strategies/__init__.py": {
+    "mtime": 1779667996.2742693,
+    "ast_hash": "e5f18e6fdd2143e370dba78e654b7c28",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/strategies/combo_fib_liquidity.py": {
+    "mtime": 1779645889.995661,
+    "ast_hash": "61e8aab5d85c85c7f8cc635d9927e788",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/strategies/intraday_markov_gate.py": {
+    "mtime": 1779666627.4322565,
+    "ast_hash": "cd2aca941426b70a3c59f761c62602ca",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/strategies/vwap_volume_rsi_reversion.py": {
+    "mtime": 1779667983.7812614,
+    "ast_hash": "b78f17274bd9c6717f512ad004221768",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/strategies/vwap_volume_reversion.py": {
+    "mtime": 1779666775.8346853,
+    "ast_hash": "b9540ba33f782cc301c48907d4c6e38f",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/scripts/markov_regime.py": {
+    "mtime": 1779487405.1562583,
+    "ast_hash": "0847993ab8472991a43a78da856207df",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/README.md": {
+    "mtime": 1779666804.3187687,
+    "ast_hash": "1c3c6448b1c344722086b8a26416260d",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/markov-hedge-fund-method.md": {
+    "mtime": 1779487405.1552582,
+    "ast_hash": "6b06d82a0c12343f7b40e330381da304",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/research/hft_evaluation_framework.md": {
+    "mtime": 1779666689.8234355,
+    "ast_hash": "044de3565201de304f783f3aeb10a666",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/research/nasdaq_combo_fib_liquidity_sweep/README.md": {
+    "mtime": 1779662801.018798,
+    "ast_hash": "ac5d9442460b401d088dc4d12cb97e55",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/research/bybit_l2_feature_prototype/README.md": {
+    "mtime": 1779666671.4603827,
+    "ast_hash": "db997be4f61832e137d719e45c985470",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/research/bybit_intraday_strategy_sprint/README.md": {
+    "mtime": 1779666427.4066973,
+    "ast_hash": "11d9029be272aff31122aadda88d8f64",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/config/trading_hub_universe.yaml": {
+    "mtime": 1779625767.2824564,
+    "ast_hash": "98800720e6bce8852154e0da21a26335",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/plans/2026-05-24_233635-high-frequency-trading-hub-strategy-plan.md": {
+    "mtime": 1779665921.9014552,
+    "ast_hash": "e2f4f58c7bbe7c61b3036644dc5d53e4",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/skills/regime/SKILL.md": {
+    "mtime": 1779487405.1562583,
+    "ast_hash": "8196a13d22cfec652654774a51652128",
+    "semantic_hash": ""
+  }
+}

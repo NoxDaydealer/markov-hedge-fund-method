@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NOX // NeuroCloud Command Center — Sketch 006 Opus</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700;900&display=swap');
+
+:root{
+  --bg-0:#01030a; --bg-1:#040918; --bg-2:#0a1834;
+  --panel:rgba(6,12,28,.72); --panel-soft:rgba(8,16,38,.42);
+  --line:rgba(116,232,255,.18); --line-soft:rgba(116,232,255,.08);
+  --txt:#e6f7ff; --txt-soft:#b6cee4; --mut:#88a4c0;
+  --cyan:#5ee7ff; --aqua:#56fff0; --blue:#5b86ff;
+  --violet:#9461ff; --pink:#ff58c9; --amber:#ffc857;
+  --orange:#ff8a3d; --green:#5cffa3; --red:#ff5276; --white:#ffffff;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg-0);color:var(--txt);font-family:Inter,system-ui,sans-serif;overflow:hidden}
+body{
+  background:
+    radial-gradient(ellipse 65% 50% at 50% 45%, rgba(20,52,124,.55), transparent 65%),
+    radial-gradient(ellipse 40% 35% at 80% 80%, rgba(110,40,190,.32), transparent 70%),
+    radial-gradient(ellipse 45% 35% at 18% 75%, rgba(255,90,180,.18), transparent 75%),
+    radial-gradient(ellipse 30% 30% at 25% 20%, rgba(255,200,87,.10), transparent 75%),
+    linear-gradient(180deg, #01030a 0%, #03081a 40%, #060f30 70%, #02050c 100%);
+}
+#bg{position:fixed;inset:0;width:100vw;height:100vh;z-index:1;pointer-events:none}
+body::before{
+  content:"";position:fixed;inset:0;z-index:2;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(94,231,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94,231,255,.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 75% 60% at 50% 50%, #000 30%, transparent 90%);
+}
+.scanline{position:fixed;left:0;right:0;height:1px;background:linear-gradient(90deg, transparent, rgba(94,231,255,.55), transparent);filter:drop-shadow(0 0 6px rgba(94,231,255,.55));z-index:3;pointer-events:none;animation: scanY 7.5s linear infinite}
+@keyframes scanY{0%{top:8%}100%{top:92%}}
+.scanline2{position:fixed;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(180deg, transparent, rgba(155,92,255,.35), transparent);filter:drop-shadow(0 0 8px rgba(155,92,255,.35));z-index:3;pointer-events:none;animation: scanX 12s linear infinite}
+@keyframes scanX{0%{transform:translateX(-44vw)}100%{transform:translateX(44vw)}}
+
+.shell{position:relative;z-index:5;height:100vh;display:grid;grid-template-columns:320px 1fr 340px;gap:14px;padding:14px}
+.panel{position:relative;border:1px solid var(--line);background:linear-gradient(180deg, var(--panel), var(--panel-soft));border-radius:22px;box-shadow:0 0 0 1px rgba(255,255,255,.02),0 30px 80px rgba(0,0,0,.55),inset 0 0 60px rgba(20,80,200,.10),inset 0 1px rgba(255,255,255,.05);backdrop-filter:blur(18px) saturate(140%);overflow:hidden}
+.panel::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 90% 0%, rgba(94,231,255,.10), transparent 35%)}
+.bracket{position:absolute;width:18px;height:18px;border-color:rgba(94,231,255,.5)}
+.bracket.tl{top:8px;left:8px;border-top:1px solid;border-left:1px solid;border-radius:8px 0 0 0}
+.bracket.tr{top:8px;right:8px;border-top:1px solid;border-right:1px solid;border-radius:0 8px 0 0}
+.bracket.bl{bottom:8px;left:8px;border-bottom:1px solid;border-left:1px solid;border-radius:0 0 0 8px}
+.bracket.br{bottom:8px;right:8px;border-bottom:1px solid;border-right:1px solid;border-radius:0 0 8px 0}
+
+.side{padding:18px;display:flex;flex-direction:column;gap:14px;min-height:0}
+.side > .scroll{overflow:auto;flex:1;display:flex;flex-direction:column;gap:14px;padding-right:4px}
+.side > .scroll::-webkit-scrollbar{width:6px}
+.side > .scroll::-webkit-scrollbar-thumb{background:rgba(94,231,255,.2);border-radius:6px}
+
+.brand{display:flex;align-items:center;gap:12px}
+.sigil{width:46px;height:46px;border-radius:50%;
+  background:
+    radial-gradient(circle at 30% 30%, #fff 0 6%, var(--cyan) 8% 18%, rgba(94,231,255,.55) 30% 48%, transparent 70%),
+    conic-gradient(from 0deg, rgba(94,231,255,.6), rgba(155,92,255,.55), rgba(255,90,180,.5), rgba(94,231,255,.6));
+  box-shadow:0 0 28px var(--cyan),0 0 60px rgba(94,231,255,.35),inset 0 0 18px rgba(255,255,255,.6);position:relative}
+.sigil::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px dashed rgba(94,231,255,.5);animation:spin 10s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.brand h1{margin:0;font:800 17px Orbitron,Inter;letter-spacing:.22em}
+.brand p{margin:2px 0 0;font:600 10px JetBrains Mono;color:var(--mut);letter-spacing:.2em;text-transform:uppercase}
+
+.secTitle{display:flex;align-items:center;justify-content:space-between;font:700 10px JetBrains Mono;letter-spacing:.28em;color:var(--cyan);text-transform:uppercase;padding-bottom:6px;border-bottom:1px dashed rgba(94,231,255,.18)}
+.secTitle small{color:var(--mut);letter-spacing:.18em;font-weight:500}
+
+.metricGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.metric{position:relative;padding:10px 12px;border-radius:14px;background:linear-gradient(180deg, rgba(8,18,38,.7), rgba(2,6,18,.6));border:1px solid rgba(94,231,255,.16);box-shadow:inset 0 0 30px rgba(94,231,255,.04)}
+.metric .v{font:700 22px JetBrains Mono;color:var(--cyan);text-shadow:0 0 16px rgba(94,231,255,.5);letter-spacing:.04em;line-height:1.05}
+.metric .l{font:600 9px JetBrains Mono;letter-spacing:.22em;color:var(--mut);text-transform:uppercase;margin-top:2px}
+.metric .spark{height:14px;margin-top:6px}
+.metric.alt .v{color:var(--violet);text-shadow:0 0 16px rgba(155,92,255,.5)}
+.metric.pink .v{color:var(--pink);text-shadow:0 0 16px rgba(255,90,180,.5)}
+.metric.green .v{color:var(--green);text-shadow:0 0 16px rgba(92,255,163,.5)}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid rgba(94,231,255,.22);background:rgba(8,18,38,.6);color:#cdeaff;border-radius:999px;padding:6px 10px;font:600 10px Inter;letter-spacing:.12em;cursor:pointer;transition:.16s}
+.chip:hover{background:rgba(94,231,255,.14);color:#fff}
+.chip.active{background:linear-gradient(90deg, rgba(94,231,255,.28), rgba(155,92,255,.28));border-color:rgba(94,231,255,.6);color:#fff;box-shadow:0 0 16px rgba(94,231,255,.35)}
+
+.feed{display:flex;flex-direction:column;gap:8px}
+.feedItem{position:relative;padding:9px 11px 9px 18px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(94,231,255,.10);font:500 11.5px Inter;color:#d6ecff;animation:slideIn .5s ease-out}
+.feedItem::before{content:"";position:absolute;left:8px;top:13px;width:5px;height:5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+.feedItem.amber::before{background:var(--amber);box-shadow:0 0 10px var(--amber)}
+.feedItem.green::before{background:var(--green);box-shadow:0 0 10px var(--green)}
+.feedItem.pink::before{background:var(--pink);box-shadow:0 0 10px var(--pink)}
+.feedItem.red::before{background:var(--red);box-shadow:0 0 10px var(--red)}
+.feedItem small{display:block;font:500 9.5px JetBrains Mono;color:var(--mut);margin-top:2px;letter-spacing:.05em}
+@keyframes slideIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+
+.bars{display:flex;align-items:flex-end;gap:1.5px;height:14px}
+.bars .b{flex:1;background:linear-gradient(180deg, var(--cyan), rgba(94,231,255,.15));border-radius:1px;opacity:.85}
+.metric.alt .bars .b{background:linear-gradient(180deg, var(--violet), rgba(155,92,255,.15))}
+.metric.pink .bars .b{background:linear-gradient(180deg, var(--pink), rgba(255,90,180,.15))}
+.metric.green .bars .b{background:linear-gradient(180deg, var(--green), rgba(92,255,163,.15))}
+
+.center{position:relative;border-radius:26px;border:1px solid rgba(94,231,255,.22);background:radial-gradient(circle at 50% 52%, rgba(20,62,140,.45), rgba(3,8,20,.6) 55%, rgba(1,3,9,.78) 90%),linear-gradient(180deg, rgba(8,16,38,.45), rgba(1,3,9,.5));box-shadow:inset 0 0 140px rgba(40,120,255,.16),0 30px 80px rgba(0,0,0,.55);overflow:hidden}
+.center::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 180px rgba(1,3,10,.7);z-index:11;border-radius:26px}
+.center .stage{position:absolute;inset:0}
+.center svg.net{width:100%;height:100%;display:block}
+
+.topHud{position:absolute;left:24px;right:24px;top:18px;z-index:12;display:flex;align-items:center;justify-content:space-between;gap:14px;pointer-events:none}
+.topHud > *{pointer-events:auto}
+.title-block h2{margin:0;font:800 14px Orbitron,Inter;letter-spacing:.32em;color:#e8f7ff;text-transform:uppercase;text-shadow:0 0 18px rgba(94,231,255,.3)}
+.title-block p{margin:2px 0 0;font:500 10.5px JetBrains Mono;color:var(--mut);letter-spacing:.2em;text-transform:uppercase}
+
+.modeSwitch{display:flex;padding:5px;border-radius:999px;border:1px solid rgba(94,231,255,.22);background:rgba(4,10,24,.72);backdrop-filter:blur(14px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.modeBtn{border:0;background:transparent;color:#9fc7e6;cursor:pointer;padding:8px 16px;border-radius:999px;font:700 11px Inter;letter-spacing:.18em;text-transform:uppercase;transition:.18s}
+.modeBtn:hover{color:#fff}
+.modeBtn.active{background:linear-gradient(90deg, rgba(94,231,255,.30), rgba(155,92,255,.30));color:#fff;box-shadow:0 0 22px rgba(94,231,255,.32)}
+
+.envChip{font:600 10px JetBrains Mono;color:var(--cyan);padding:7px 11px;border-radius:999px;border:1px solid rgba(94,231,255,.3);background:rgba(94,231,255,.06);letter-spacing:.14em;text-transform:uppercase;backdrop-filter:blur(14px)}
+
+.bottomHud{position:absolute;left:24px;right:24px;bottom:18px;z-index:12;display:flex;justify-content:space-between;align-items:flex-end;gap:14px;pointer-events:none}
+.bottomHud > *{pointer-events:auto}
+.legend{display:flex;gap:8px;flex-wrap:wrap;background:rgba(2,6,18,.55);border:1px solid rgba(94,231,255,.16);border-radius:14px;padding:8px 10px;backdrop-filter:blur(12px);max-width:62%}
+.legend span{display:flex;align-items:center;gap:6px;font:600 10px JetBrains Mono;color:#bcd5ec;letter-spacing:.1em}
+.legend i{display:inline-block;width:7px;height:7px;border-radius:50%;box-shadow:0 0 10px currentColor}
+.miniReadout{display:flex;gap:14px;background:rgba(2,6,18,.55);border:1px solid rgba(94,231,255,.16);border-radius:14px;padding:8px 12px;backdrop-filter:blur(12px);font:600 10px JetBrains Mono;color:#bcd5ec;letter-spacing:.08em}
+.miniReadout b{color:var(--cyan);text-shadow:0 0 8px rgba(94,231,255,.4)}
+
+.cornerHud{position:absolute;z-index:12;font:600 10px JetBrains Mono;color:#a5c1d8;letter-spacing:.08em;pointer-events:none}
+.cornerHud.tl{top:82px;left:24px}
+.cornerHud.tr{top:82px;right:24px;text-align:right}
+.cornerHud .row{display:flex;align-items:center;gap:8px;margin:5px 0}
+.cornerHud.tr .row{justify-content:flex-end}
+.cornerHud .d{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+.cornerHud b{color:var(--cyan);text-shadow:0 0 8px rgba(94,231,255,.4)}
+
+.detailHero{border-radius:18px;padding:16px;background:radial-gradient(circle at top right, rgba(94,231,255,.16), rgba(10,18,40,.65) 55%),linear-gradient(180deg, rgba(8,16,38,.7), rgba(2,6,18,.5));border:1px solid rgba(94,231,255,.22);box-shadow:inset 0 0 30px rgba(94,231,255,.05)}
+.detailHero .pre{font:600 10px JetBrains Mono;color:var(--cyan);letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.detailHero .pre i{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.4;transform:scale(.7)}}
+.detailHero h3{margin:8px 0 4px;font:800 22px Orbitron,Inter;letter-spacing:.06em;text-shadow:0 0 18px rgba(94,231,255,.4)}
+.detailHero p{margin:0;font:500 12.5px Inter;color:#bcd5ec;line-height:1.55}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.kv div{padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)}
+.kv b{display:block;font:700 14px JetBrains Mono;color:var(--green);letter-spacing:.04em}
+.kv b.cyan{color:var(--cyan)}.kv b.violet{color:var(--violet)}.kv b.pink{color:var(--pink)}.kv b.amber{color:var(--amber)}
+.kv span{display:block;font:600 9px JetBrains Mono;color:var(--mut);text-transform:uppercase;letter-spacing:.18em;margin-top:2px}
+
+.linked{display:flex;flex-direction:column;gap:6px}
+.linkedRow{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);font:500 11.5px Inter;color:#cee2f6;cursor:pointer;transition:.15s}
+.linkedRow:hover{background:rgba(94,231,255,.08);border-color:rgba(94,231,255,.3);transform:translateX(2px)}
+.linkedRow .dotc{width:7px;height:7px;border-radius:50%;box-shadow:0 0 8px currentColor;flex-shrink:0}
+.linkedRow .lf{display:flex;align-items:center;gap:8px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.linkedRow .lf > span:not(.dotc){overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.linkedRow .tag{font:700 9px JetBrains Mono;letter-spacing:.15em;color:var(--mut);text-transform:uppercase;flex-shrink:0;margin-left:8px}
+
+.queue{display:grid;gap:8px}
+.qItem{position:relative;padding:9px 11px 9px 14px;border-radius:12px;background:rgba(2,6,18,.55);border:1px solid rgba(255,255,255,.07);border-left:3px solid var(--cyan);cursor:pointer;transition:.15s}
+.qItem:hover{background:rgba(94,231,255,.05);transform:translateX(2px)}
+.qItem.amber{border-left-color:var(--amber)}
+.qItem.red{border-left-color:var(--red)}
+.qItem.green{border-left-color:var(--green)}
+.qItem.violet{border-left-color:var(--violet)}
+.qItem strong{display:block;font:600 12px Inter;color:#e2f3ff}
+.qItem small{display:block;font:500 9.5px JetBrains Mono;color:var(--mut);margin-top:2px;letter-spacing:.05em}
+
+.net g.node{cursor:pointer;transition:filter .15s}
+.net g.node:hover{filter:brightness(1.5) drop-shadow(0 0 8px currentColor)}
+.net circle.aura{fill:none}
+.net circle.glow{mix-blend-mode:screen;pointer-events:none}
+.net text.lbl{font:700 10px JetBrains Mono;fill:#eafcff;text-anchor:middle;paint-order:stroke;stroke:#000a1c;stroke-width:3px;stroke-linejoin:round;letter-spacing:.06em;text-transform:uppercase;pointer-events:none}
+.net text.lblBig{font-size:11.5px;fill:#ffffff;letter-spacing:.08em}
+.net text.lblCore{font-size:13.5px;letter-spacing:.24em;fill:#ffffff}
+.net g.selRing{pointer-events:none}
+.net .edge{fill:none;mix-blend-mode:screen}
+.net circle.pulse{mix-blend-mode:screen;pointer-events:none}
+.net ellipse.ring{opacity:.18;stroke-dasharray:2 5;fill:none;stroke:rgba(94,231,255,.45)}
+
+#tip{position:fixed;z-index:99;pointer-events:none;padding:6px 9px;border-radius:8px;background:rgba(2,6,18,.92);border:1px solid rgba(94,231,255,.35);font:600 10.5px JetBrains Mono;color:#dff5ff;letter-spacing:.08em;opacity:0;transition:opacity .12s;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 18px rgba(94,231,255,.18)}
+
+@media (max-width:1480px){.shell{grid-template-columns:288px 1fr 308px;gap:10px;padding:10px}.metric .v{font-size:20px}}
+@media (max-width:1280px){.shell{grid-template-columns:264px 1fr 284px}.brand h1{font-size:15px}.metric{padding:8px 10px}.metric .v{font-size:18px}.legend{max-width:55%;gap:6px}}
+@media (max-width:1100px){.shell{grid-template-columns:1fr;overflow:auto;height:auto;min-height:100vh}html,body{overflow:auto}.center{height:620px}.topHud{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="scanline"></div>
+<div class="scanline2"></div>
+
+<div class="shell">
+  <aside class="panel side">
+    <span class="bracket tl"></span><span class="bracket tr"></span>
+    <span class="bracket bl"></span><span class="bracket br"></span>
+    <div class="brand">
+      <div class="sigil"></div>
+      <div><h1>NOX // CORE</h1><p>neurocloud · v0.06 opus</p></div>
+    </div>
+    <div class="scroll">
+      <div>
+        <div class="secTitle">System Vitals <small>LIVE</small></div>
+        <div class="metricGrid" style="margin-top:8px">
+          <div class="metric"><div class="v" id="kpiNodes">182</div><div class="l">Live entities</div><div class="spark"><div class="bars" id="sp1"></div></div></div>
+          <div class="metric alt"><div class="v">42</div><div class="l">Active routes</div><div class="spark"><div class="bars" id="sp2"></div></div></div>
+          <div class="metric pink"><div class="v">17</div><div class="l">Blocked tasks</div><div class="spark"><div class="bars" id="sp3"></div></div></div>
+          <div class="metric green"><div class="v">22</div><div class="l">Completed</div><div class="spark"><div class="bars" id="sp4"></div></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="secTitle">Domain Filter</div>
+        <div class="chips" style="margin-top:8px">
+          <button class="chip active" data-filter="all">ALL</button>
+          <button class="chip" data-filter="core">CORE</button>
+          <button class="chip" data-filter="agent">AGENTS</button>
+          <button class="chip" data-filter="memory">MEMORY</button>
+          <button class="chip" data-filter="research">RESEARCH</button>
+          <button class="chip" data-filter="trading">TRADING</button>
+          <button class="chip" data-filter="risk">RISK</button>
+          <button class="chip" data-filter="route">ROUTES</button>
+          <button class="chip" data-filter="cron">CRONJOBS</button>
+          <button class="chip" data-filter="blocked">BLOCKED</button>
+        </div>
+      </div>
+      <div>
+        <div class="secTitle">Pulse Feed <small>5m</small></div>
+        <div class="feed" style="margin-top:8px" id="feed">
+          <div class="feedItem">RegimeGatedCombo · backtest ✓ promoted via Go/No-Go<small>discord://strategy-evaluations · 14s ago</small></div>
+          <div class="feedItem amber">Book watchdog flagged 6 new sources, OCR pending<small>cron://book-watchdog · 1m ago</small></div>
+          <div class="feedItem green">Paper portfolio rebalance · 0 fills · risk OK<small>paper://ledger · 2m ago</small></div>
+          <div class="feedItem">Daily Markov regime · BTCUSDT → BULL (84.2%)<small>cron://daily-markov · 8m ago</small></div>
+          <div class="feedItem pink">Telegram command /status processed<small>route://telegram · 11m ago</small></div>
+          <div class="feedItem red">Karte-10-Watchdog · completed with error<small>cron://karte-10 · 22m ago</small></div>
+          <div class="feedItem">Hermes context gateway · 1187 queries in 1h<small>core://hermes · 30m ago</small></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="panel center">
+    <span class="bracket tl"></span><span class="bracket tr"></span>
+    <span class="bracket bl"></span><span class="bracket br"></span>
+    <div class="topHud">
+      <div class="title-block">
+        <h2>Mission Field // Trading Hub Brain</h2>
+        <p>video-2 reference · living neural command field · paper-trading research only</p>
+      </div>
+      <div class="modeSwitch">
+        <button class="modeBtn active" id="latticeBtn">Neural Lattice</button>
+        <button class="modeBtn" id="cloudBtn">Particle Cloud</button>
+      </div>
+      <div class="envChip">ENV: PAPER · NO LIVE ORDERS</div>
+    </div>
+    <div class="cornerHud tl">
+      <div class="row"><span class="d"></span> Hermes online · <b>14d 02:31</b></div>
+      <div class="row"><span class="d" style="background:var(--violet);box-shadow:0 0 10px var(--violet)"></span> Vault sync · <b style="color:var(--violet)">28s</b></div>
+      <div class="row"><span class="d" style="background:var(--amber);box-shadow:0 0 10px var(--amber)"></span> 6 OCR queued · <b style="color:var(--amber)">books</b></div>
+      <div class="row">Mode · <b id="modeLabel">LATTICE</b></div>
+    </div>
+    <div class="cornerHud tr">
+      <div class="row">FPS <b id="fpsLabel">60</b> · NODES <b id="ncLabel">182</b></div>
+      <div class="row">EDGES <b id="ecLabel" style="color:var(--violet)">214</b> · PULSES <b style="color:var(--pink)">24</b></div>
+      <div class="row">Regime · <b style="color:var(--green)">BULL 84.2%</b></div>
+      <div class="row">Risk · <b style="color:var(--green)">NOMINAL</b></div>
+    </div>
+    <div class="stage">
+      <svg class="net" id="net" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <radialGradient id="coreBloom" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+            <stop offset="20%" stop-color="#5ee7ff" stop-opacity=".85"/>
+            <stop offset="55%" stop-color="rgba(155,92,255,.4)"/>
+            <stop offset="100%" stop-color="rgba(20,40,90,0)"/>
+          </radialGradient>
+          <filter id="bloom" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="1.8" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="bloomXL" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="6"/>
+          </filter>
+        </defs>
+        <circle id="centerBloom" cx="600" cy="400" r="220" fill="url(#coreBloom)" opacity=".65"/>
+        <g id="ringGroup"></g>
+        <g id="edgeLayer"></g>
+        <g id="nodeLayer"></g>
+        <g id="selectionLayer"></g>
+        <g id="pulseLayer"></g>
+        <g id="labelLayer"></g>
+      </svg>
+    </div>
+    <div class="bottomHud">
+      <div class="legend">
+        <span><i style="color:var(--white);background:var(--white)"></i>CORE</span>
+        <span><i style="color:var(--cyan);background:var(--cyan)"></i>AGENT</span>
+        <span><i style="color:var(--violet);background:var(--violet)"></i>MEMORY</span>
+        <span><i style="color:var(--amber);background:var(--amber)"></i>RESEARCH</span>
+        <span><i style="color:var(--blue);background:var(--blue)"></i>TRADING</span>
+        <span><i style="color:var(--green);background:var(--green)"></i>RISK</span>
+        <span><i style="color:var(--pink);background:var(--pink)"></i>ROUTE</span>
+        <span><i style="color:var(--orange);background:var(--orange)"></i>CRON</span>
+        <span><i style="color:var(--red);background:var(--red)"></i>BLOCKED</span>
+      </div>
+      <div class="miniReadout">
+        <div>HUB <b>nox.local</b></div>
+        <div>BRANCH <b>main</b></div>
+        <div>RENDER <b id="rdrLabel">SVG · 30fps</b></div>
+      </div>
+    </div>
+  </main>
+
+  <aside class="panel side">
+    <span class="bracket tl"></span><span class="bracket tr"></span>
+    <span class="bracket bl"></span><span class="bracket br"></span>
+    <div class="detailHero">
+      <div class="pre"><i></i>SELECTED ENTITY · <span id="detCat">CORE</span></div>
+      <h3 id="detTitle">NOX CORE</h3>
+      <p id="detDesc">Hermes context gateway · orchestration nucleus · routes Telegram/Discord/Kanban into the Trading Hub research brain. Acts as the multiplex between Anton's commands and downstream worker agents.</p>
+      <div class="kv">
+        <div><b class="cyan" id="detV1">ACTIVE</b><span>State</span></div>
+        <div><b id="detV2">34</b><span>Links</span></div>
+        <div><b class="violet" id="detV3">14d 02:31</b><span>Uptime</span></div>
+        <div><b class="amber" id="detV4">1187</b><span>1h queries</span></div>
+      </div>
+    </div>
+    <div class="scroll">
+      <div>
+        <div class="secTitle">Connected Entities <small id="lkCount">0 links</small></div>
+        <div class="linked" id="linkedList" style="margin-top:8px"></div>
+      </div>
+      <div>
+        <div class="secTitle">Live Queue <small>top 6</small></div>
+        <div class="queue" style="margin-top:8px">
+          <div class="qItem violet" data-id="cronDM"><strong>Daily Markov regime scan</strong><small>cron · 09:00 · → discord://daily-markov-regime</small></div>
+          <div class="qItem amber" data-id="books"><strong>OCR pages waiting · 6 books</strong><small>blocked · researcher · waiting on Anton</small></div>
+          <div class="qItem" data-id="bktst"><strong>RegimeGatedCombo · evaluation report</strong><small>coder · backtest_report.py · paper queue</small></div>
+          <div class="qItem green" data-id="paper"><strong>Paper portfolio rebalance</strong><small>risk · drawdown OK · margin 38%</small></div>
+          <div class="qItem red" data-id="cronK10"><strong>Karte-10-Watchdog · completed/error</strong><small>cron · last run 22m ago</small></div>
+          <div class="qItem amber" data-id="imkv"><strong>Bybit L2 orderbook imbalance · prototype</strong><small>researcher · t_54d65089</small></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<div id="tip"></div>
+
+<script>
+(function(){
+'use strict';
+
+const PALETTE = {
+  core:'#ffffff', agent:'#5ee7ff', memory:'#9461ff', research:'#ffc857',
+  trading:'#5b86ff', risk:'#5cffa3', route:'#ff58c9', cron:'#ff8a3d',
+  blocked:'#ff5276', task:'#86a8c4', signal:'#56fff0',
+};
+
+let _seed = 1729;
+function rnd(){ _seed=(_seed*1664525+1013904223)>>>0; return _seed/4294967296 }
+function jit(a){ return (rnd()-.5)*2*a }
+function gauss(){ let u=0,v=0; while(u===0)u=rnd(); while(v===0)v=rnd(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v) }
+
+const NAMED = [
+  {id:'nox',     label:'NOX CORE',           cat:'core',    state:'active',  ring:0, role:'router',  desc:'Hermes context gateway · orchestration nucleus · routes Telegram + Discord + Kanban into the Trading Hub research brain.', m:{conns:34,uptime:'14d 02:31',rate:'1187 q/h'}},
+  {id:'hermes',  label:'Hermes Gateway',     cat:'core',    state:'active',  ring:1, role:'gateway', desc:'MCP-style memory + context router. Bridges Claude sessions, graph stores, and context packets across the cluster.', m:{conns:18,uptime:'14d 02:31',rate:'432 q/h'}},
+  {id:'ctxgw',   label:'Context Gateway',    cat:'core',    state:'active',  ring:1, role:'gateway', desc:'Serves /get_context_packet, graphify policy and kanban_state across worker agents.', m:{conns:12,uptime:'14d 02:31',rate:'212 q/h'}},
+  {id:'orch',    label:'Orchestrator',       cat:'agent',   state:'active',  ring:1, role:'agent',   desc:'Top-level orchestrator. Decomposes Anton-level intents into Kanban cards and reviews completion.', m:{conns:9,uptime:'7d 11:04',tasks:42}},
+  {id:'kanban',  label:'Kanban Dispatcher',  cat:'agent',   state:'active',  ring:1, role:'agent',   desc:'Multi-agent task lane. Holds coder, researcher, reviewer queues and gates priority order.', m:{conns:15,uptime:'7d 11:04',tasks:38}},
+  {id:'coder',   label:'Coder Worker',       cat:'agent',   state:'idle',    ring:2, role:'worker',  desc:'Implementation agent. Picks coder-labeled cards and produces commits + PRs.', m:{conns:6,uptime:'7d 11:04',tasks:14}},
+  {id:'rsrch',   label:'Researcher Worker',  cat:'agent',   state:'idle',    ring:2, role:'worker',  desc:'Trading research extraction agent. Reads books/YouTube and emits Obsidian notes.', m:{conns:7,uptime:'7d 11:04',tasks:11}},
+  {id:'rev',     label:'Reviewer Worker',    cat:'agent',   state:'idle',    ring:2, role:'worker',  desc:'Promotion review. Gates backtest → paper-trading progression with structured checks.', m:{conns:4,uptime:'7d 11:04',tasks:5}},
+  {id:'hermesAg',label:'Hermes Agent',       cat:'agent',   state:'active',  ring:2, role:'worker',  desc:'Operational backbone agent. Owns Kanban visual + dashboard sketches.', m:{conns:8,uptime:'7d 11:04',tasks:9}},
+  {id:'vault',   label:'Obsidian Vault',     cat:'memory',  state:'active',  ring:2, role:'store',   desc:'Second brain · 20 dirs · 14 root files. Holds decisions, strategies and source notes.', m:{conns:12,files:124,size:'18 MB'}},
+  {id:'facts',   label:'Fact Store',         cat:'memory',  state:'active',  ring:2, role:'store',   desc:'Machine recall graph. Indexed facts surfaced to Hermes via search_memory.', m:{conns:9,facts:2187,recall:'94%'}},
+  {id:'dec',     label:'Decision Log',       cat:'memory',  state:'active',  ring:3, role:'store',   desc:'Append-only log of architectural and operational decisions.', m:{conns:4,entries:62}},
+  {id:'memIdx',  label:'Memory Index',       cat:'memory',  state:'active',  ring:3, role:'store',   desc:'Vector + keyword index over Obsidian, Fact Store and chat transcripts.', m:{conns:6,size:'42 MB'}},
+  {id:'books',   label:'Trading Books',      cat:'research',state:'waiting', ring:3, role:'source',  desc:'76 files across 40 dirs. Isichenko, Murphy, Graham, Strimpel, Hands-On AI Trading.', m:{conns:11,books:6,ocrPending:18}},
+  {id:'yt',      label:'YouTube Intake',     cat:'research',state:'todo',    ring:3, role:'source',  desc:'Strategy video backlog. Triaged into Obsidian source graph.', m:{conns:3,videos:42}},
+  {id:'ideas',   label:'Strategy Ideas',     cat:'research',state:'active',  ring:3, role:'source',  desc:'Brainstorm ideas folder. Promoted to strategies/ after review.', m:{conns:5,ideas:23}},
+  {id:'reels',   label:'Reels Pipeline',     cat:'research',state:'idle',    ring:4, role:'source',  desc:'Short-form ideas folder. Currently low-priority.', m:{conns:2,ideas:8}},
+  {id:'regime',  label:'RegimeGatedCombo',   cat:'trading', state:'active',  ring:3, role:'strategy',desc:'Regime-gated combination strategy. Markov-state filter on top of VWAP/RSI/Bollinger ensemble.', m:{conns:8,sharpe:'1.42',cagr:'18.4%'}},
+  {id:'vwap',    label:'VWAP RSI Reversion', cat:'trading', state:'active',  ring:4, role:'strategy',desc:'Core mean-reversion on volume-weighted average price + RSI bands.', m:{conns:4,sharpe:'0.91',cagr:'9.1%'}},
+  {id:'bvm',     label:'Bollinger VWAP Mom', cat:'trading', state:'todo',    ring:4, role:'strategy',desc:'Bollinger Band breakout · VWAP-anchored momentum. v0 implementation pending.', m:{conns:3,sharpe:'—'}},
+  {id:'imkv',    label:'Intraday Markov',    cat:'trading', state:'todo',    ring:4, role:'strategy',desc:'Intraday regime gate for HFT strategies. Research phase.', m:{conns:3,sharpe:'—'}},
+  {id:'cflq',    label:'Combo Fib Liquidity',cat:'trading', state:'active',  ring:4, role:'strategy',desc:'Liquidity sweep + fibonacci confluence combo. Backtest queue.', m:{conns:3,sharpe:'1.08'}},
+  {id:'mkvEng',  label:'Markov Engine',      cat:'trading', state:'active',  ring:3, role:'engine',  desc:'Transition-matrix model. Produces Bull/Bear/Sideways probabilities per ticker.', m:{conns:6,tickers:24}},
+  {id:'bktst',   label:'Backtest Reports',   cat:'trading', state:'active',  ring:4, role:'report',  desc:'combo_comparison_report.py output. Stored under research/.', m:{conns:6,reports:34}},
+  {id:'cronDM',  label:'Daily Markov Cron',  cat:'cron',    state:'active',  ring:3, role:'cron',    desc:'09:00 daily · runs daily-markov scan, posts to Discord daily-markov-regime.', m:{conns:4,next:'09:00',target:'discord'}},
+  {id:'cronBW',  label:'Book Watchdog',      cat:'cron',    state:'active',  ring:4, role:'cron',    desc:'every 15m · scans book folder for new sources. Notifies strategy-evaluations.', m:{conns:3,next:'+12m',target:'discord'}},
+  {id:'cronBK',  label:'Hermes Backup',      cat:'cron',    state:'active',  ring:4, role:'cron',    desc:'03:00 daily · pushes Hermes state and config to origin.', m:{conns:2,next:'03:00',target:'github'}},
+  {id:'cronK10', label:'Karte-10 Watchdog',  cat:'cron',    state:'blocked', ring:4, role:'cron',    desc:'completed/error · last run 22m ago. Needs reset.', m:{conns:2,last:'22m'}},
+  {id:'gate',    label:'Go/No-Go Gate',      cat:'risk',    state:'active',  ring:2, role:'gate',    desc:'Promotion safety. Requires drawdown < threshold, sharpe > 0.8, paper > 30d clean.', m:{conns:8,passed:14,rej:3}},
+  {id:'risk',    label:'Paper Risk Engine',  cat:'risk',    state:'active',  ring:3, role:'guard',   desc:'Drawdown guards, max margin, kill switch. Paper trading scope only.', m:{conns:6,maxDD:'4.2%'}},
+  {id:'mos',     label:'Margin of Safety',   cat:'risk',    state:'active',  ring:3, role:'filter',  desc:'Graham-inspired filter on price vs intrinsic anchor. Used for long-bias gating.', m:{conns:4,buffer:'15%'}},
+  {id:'ddg',     label:'Drawdown Guard',     cat:'risk',    state:'active',  ring:4, role:'guard',   desc:'Hard stop at 8% per-strategy drawdown. Soft warning at 4%.', m:{conns:4,now:'1.8%'}},
+  {id:'paper',   label:'Paper Portfolio',    cat:'risk',    state:'active',  ring:3, role:'ledger',  desc:'Virtual ledger and state. Mirrors Bybit public price feed only.', m:{conns:7,equity:'$ 10,381.42'}},
+  {id:'discord', label:'Discord Threads',    cat:'route',   state:'active',  ring:2, role:'route',   desc:'Threaded reports · daily-markov-regime, strategy-evaluations, ops.', m:{conns:11,threads:8}},
+  {id:'telegram',label:'Telegram Command',   cat:'route',   state:'active',  ring:2, role:'route',   desc:'Fast DM control surface. /status /promote /pause commands.', m:{conns:5,cmds:42}},
+  {id:'evals',   label:'Strategy Evaluations',cat:'route',  state:'active',  ring:3, role:'thread',  desc:'Discord thread. Auto-posts evaluation summaries from backtest_report.py.', m:{conns:5,posts:34}},
+  {id:'dmr',     label:'Daily Markov Report',cat:'route',   state:'active',  ring:4, role:'thread',  desc:'Daily regime report. Posted by cronDM.', m:{conns:3,posts:14}},
+];
+
+const SATS = [];
+function pushSat(label, cat, state, parentId, type){
+  SATS.push({id:'s'+SATS.length, label, cat, state, parent:parentId, type, ring:5});
+}
+const taskTitles = ['MenuFlow QR card','MenuFlow Supabase','MenuFlow Stripe gate','broaden crypto univ','combo eval roadmap','extract book ideas','param sweep infra','core VWAP RSI sweep','RegimeGated report','Kanban visual redux','Bybit L2 orderbook','YouTube triage','data quality gates','buy-and-hold base','tx cost model','paper ledger state','drawdown kill switch','TG daily report','pre-realmoney chklst','VPS reboot deferred'];
+const taskParents = ['kanban','coder','rsrch','rev','hermesAg','orch'];
+taskTitles.forEach((t,i)=> pushSat(t, 'task', i%3===0?'blocked':(i%5===0?'scheduled':'todo'), taskParents[i%taskParents.length], 'task'));
+
+['BTCUSDT BULL 84%','ETHUSDT SIDEWAYS','SOLUSDT BEAR weak','BNBUSDT BULL 71%','XRPUSDT SIDEWAYS','ADAUSDT BULL 62%','DOTUSDT BEAR strong']
+  .forEach((s,i)=> pushSat(s, 'signal', 'active', i%2===0?'mkvEng':'regime', 'signal'));
+
+['go_no_go_gate.py','combo_signal.py','intraday_markov_gate.py','parameter_sweep.py','combination_runner.py','backtest_report.py','bybit_public_collector.py','hft_evaluator.py']
+  .forEach((f,i)=> pushSat(f, 'trading', 'active', i%2===0?'bktst':(i%3===0?'regime':'vwap'), 'file'));
+
+['Trading Hub.md','Inbox.md','Strategy Idea Index','Decision Log.md','Daily Markov Index','Paper Portfolio Index']
+  .forEach((n,i)=> pushSat(n, 'memory', 'active', i%2===0?'vault':'facts', 'note'));
+
+['Isichenko · Quant PM','Strimpel · Algo Cook','Hands-On AI Trading','Murphy · TA Märkte','Graham · Intel Inv','Cene · Profi Börse']
+  .forEach((b)=> pushSat(b, 'research', 'waiting', 'books', 'book'));
+
+['YT · Larry Connors','YT · ProfitMax','YT · Quant Galore','YT · TradePros','YT · KryptoLab','YT · ChartScanner']
+  .forEach((y,i)=> pushSat(y, 'research', i%2?'todo':'active', 'yt', 'video'));
+
+['daily-vault-sync','daily-fact-snapshot','daily-context-prune','daily-equity-snap','rolling-markov-rescore']
+  .forEach((c,i)=> pushSat(c, 'cron', 'active', i%2?'cronDM':'cronBK', 'cron'));
+
+const DUST = [];
+for(let i=0;i<92;i++){
+  const cat = ['agent','research','trading','route','risk','memory','cron','signal','task','signal','task'][i%11];
+  const state = (i%17===0)?'blocked':(i%9===0)?'waiting':(i%5===0)?'todo':'active';
+  DUST.push({id:'d'+i, label:'', cat, state, ring:5, type:'dust'});
+}
+
+const ALL = [...NAMED, ...SATS, ...DUST];
+const lookup = {}; ALL.forEach(n=>lookup[n.id]=n);
+
+const EDGES = [];
+function E(a,b,kind){ EDGES.push({a,b,kind:kind||'spoke'}) }
+
+['hermes','ctxgw','orch','kanban','vault','facts','discord','telegram','gate'].forEach(t=>E('nox',t,'spoke'));
+[['hermes','ctxgw','inner'],['hermes','orch','inner'],['hermes','vault','inner'],['hermes','facts','inner'],
+ ['ctxgw','kanban','inner'],['orch','kanban','inner'],['orch','rev','inner'],
+ ['kanban','coder','inner'],['kanban','rsrch','inner'],['kanban','rev','inner'],['kanban','hermesAg','inner'],
+ ['vault','dec','inner'],['vault','memIdx','inner'],['facts','memIdx','inner'],
+ ['vault','books','inner'],['vault','yt','inner'],['vault','ideas','inner'],['vault','reels','dim'],
+ ['books','rsrch','inner'],['yt','rsrch','inner'],['ideas','rsrch','inner'],
+ ['rsrch','regime','inner'],['rsrch','vwap','dim'],['rsrch','bvm','dim'],['rsrch','imkv','dim'],
+ ['regime','mkvEng','hot'],['regime','vwap','inner'],['regime','bvm','inner'],['regime','cflq','inner'],
+ ['imkv','mkvEng','inner'],['mkvEng','cronDM','inner'],['cronDM','dmr','inner'],['dmr','discord','inner'],
+ ['regime','bktst','inner'],['vwap','bktst','dim'],['bvm','bktst','dim'],['cflq','bktst','dim'],
+ ['bktst','evals','inner'],['evals','discord','inner'],
+ ['regime','gate','hot'],['vwap','gate','dim'],['bvm','gate','dim'],
+ ['gate','paper','hot'],['paper','risk','inner'],['paper','mos','inner'],['paper','ddg','inner'],
+ ['risk','telegram','inner'],['paper','discord','inner'],
+ ['cronBK','vault','dim'],['cronBW','books','inner'],['cronBW','discord','dim'],['cronK10','kanban','dim'],
+ ['telegram','orch','inner'],['discord','orch','inner'],
+ ['kanban','vault','dim'],['hermes','kanban','dim'],['orch','regime','dim'],['orch','paper','dim'],
+ ['facts','regime','dim'],['dec','gate','dim']].forEach(([a,b,k])=>E(a,b,k));
+
+SATS.forEach(s=> E(s.parent, s.id, s.type==='signal'?'hot':(s.type==='task' && s.state==='blocked'?'dim':'inner')));
+const dustParentByCat = {agent:'kanban',research:'books',trading:'regime',route:'discord',risk:'paper',memory:'vault',cron:'cronBW',signal:'mkvEng',task:'kanban'};
+DUST.forEach(d=> E(dustParentByCat[d.cat]||'nox', d.id, 'dim'));
+
+const W = 1200, H = 800, CX = W/2, CY = H/2;
+const RING_R = [0, 110, 220, 320, 410, 495];
+const ringAngleOff = [0, 0.3, 1.1, 2.0, 0.7, 0];
+
+function layoutLattice(){
+  const buckets = {0:[],1:[],2:[],3:[],4:[],5:[]};
+  ALL.forEach(n=>{ buckets[n.ring||5].push(n) });
+  Object.entries(buckets).forEach(([rs, list])=>{
+    const ring = +rs;
+    if(ring===0){ list.forEach(n=>{ n.lx=CX; n.ly=CY; n.dep=1 }); return }
+    const r = RING_R[ring], off = ringAngleOff[ring]||0, N = list.length;
+    list.forEach((n,i)=>{
+      const a = off + (i/N)*Math.PI*2 + jit(0.04);
+      const rr = r + jit(ring<5?20:55);
+      n.lx = CX + Math.cos(a)*rr;
+      n.ly = CY + Math.sin(a)*rr*0.78;
+      n.dep = 0.45 + (1 - ring/5)*0.55 + (rnd()*0.12 - 0.06);
+    });
+  });
+}
+
+const CLUSTERS = {
+  core:[CX,CY], agent:[CX-300,CY-190], memory:[CX+290,CY-200],
+  research:[CX-340,CY+160], trading:[CX+320,CY+110], risk:[CX+170,CY+230],
+  route:[CX-160,CY+260], cron:[CX+340,CY-40],
+  signal:[CX-30,CY-260], task:[CX-40,CY+260], blocked:[CX-320,CY-30],
+};
+function layoutCloud(){
+  ALL.forEach(n=>{
+    if(n.id==='nox'){ n.cx=CX; n.cy=CY; n.dep=1; return }
+    const key = n.cat;
+    const c = CLUSTERS[key]||CLUSTERS.core;
+    const spread = (n.ring<=3)?44:84;
+    n.cx = c[0] + gauss()*spread;
+    n.cy = c[1] + gauss()*spread*0.78;
+    n.dep = 0.30 + rnd()*0.7;
+  });
+}
+layoutLattice(); layoutCloud();
+
+const $net=document.getElementById('net'), $edge=document.getElementById('edgeLayer'),
+      $node=document.getElementById('nodeLayer'), $lbl=document.getElementById('labelLayer'),
+      $ring=document.getElementById('ringGroup'), $pulse=document.getElementById('pulseLayer'),
+      $bloom=document.getElementById('centerBloom'), $select=document.getElementById('selectionLayer');
+
+let MODE='lattice', FILTER='all', SELECTED_ID=null;
+
+function nodeColor(n){
+  if(n.state==='blocked') return PALETTE.blocked;
+  if(n.cat==='core') return PALETTE.core;
+  return PALETTE[n.cat] || PALETTE.agent;
+}
+function nodeSize(n){
+  if(n.id==='nox') return 22;
+  if(n.ring===1) return 9;
+  if(n.ring===2) return 7;
+  if(n.ring===3) return 5.5;
+  if(n.ring===4) return 4.4;
+  return 2.4 + (n.type==='signal'?1.8:0) + rnd()*1.3;
+}
+function nodePos(n){ return MODE==='lattice' ? [n.lx, n.ly] : [n.cx, n.cy] }
+function visible(n){
+  if(FILTER==='all') return true;
+  if(FILTER==='blocked') return n.state==='blocked';
+  return n.cat===FILTER;
+}
+
+function buildRings(){
+  let s='';
+  RING_R.slice(1,5).forEach((r)=>{
+    s += `<ellipse cx="${CX}" cy="${CY}" rx="${r}" ry="${(r*0.82).toFixed(0)}" class="ring"/>`;
+  });
+  $ring.innerHTML = MODE==='lattice' ? s : '';
+  $bloom.setAttribute('opacity', MODE==='lattice' ? '.65' : '.35');
+  $bloom.setAttribute('r', MODE==='lattice' ? '220' : '160');
+}
+
+function renderEdges(){
+  const opMul = MODE==='cloud' ? 0.5 : 1;
+  let s='';
+  EDGES.forEach((e)=>{
+    const a=lookup[e.a], b=lookup[e.b];
+    if(!a||!b||!visible(a)||!visible(b)) return;
+    const [ax,ay]=nodePos(a), [bx,by]=nodePos(b);
+    const c = e.kind==='hot' ? '#ff58c9' : e.kind==='inner' ? '#5ee7ff' : e.kind==='spoke' ? '#9461ff' : '#3a607e';
+    const sw = e.kind==='hot'?1.2 : e.kind==='spoke'?1 : e.kind==='inner'?0.7 : 0.45;
+    const op = (e.kind==='dim'?0.32 : e.kind==='inner'?0.55 : e.kind==='spoke'?0.7 : 0.85) * opMul;
+    const dx=bx-ax, dy=by-ay, dist=Math.hypot(dx,dy);
+    if(dist<1) return;
+    const curveAmt = Math.min(36, dist*0.13);
+    const mx = (ax+bx)/2 + (-dy/dist)*curveAmt;
+    const my = (ay+by)/2 + ( dx/dist)*curveAmt;
+    s += `<path class="edge" d="M${ax.toFixed(1)} ${ay.toFixed(1)} Q${mx.toFixed(1)} ${my.toFixed(1)} ${bx.toFixed(1)} ${by.toFixed(1)}" stroke="${c}" stroke-opacity="${op.toFixed(2)}" stroke-width="${sw}"/>`;
+  });
+  $edge.innerHTML = s;
+}
+
+function renderNodes(){
+  const list = ALL.filter(visible).slice();
+  if(MODE==='cloud') list.sort((a,b)=>(a.dep||0)-(b.dep||0));
+  let s='';
+  list.forEach(n=>{
+    const [x,y]=nodePos(n);
+    const c=nodeColor(n);
+    const baseR = nodeSize(n);
+    const dep = MODE==='cloud' ? (n.dep ?? .6) : 1;
+    const r = baseR * (MODE==='cloud' ? (0.55 + dep*0.85) : 1);
+    const op = MODE==='cloud' ? (.25 + dep*0.7) : 0.95;
+    const haloR = r * (MODE==='cloud' ? 4.2 : 3.0);
+    const ringR = r + (MODE==='cloud' ? 5+dep*8 : 5);
+    s += `<g class="node" data-id="${n.id}" style="color:${c}">`;
+    s += `<circle class="glow" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${haloR.toFixed(1)}" fill="${c}" fill-opacity="${(op*0.10).toFixed(2)}"/>`;
+    if(n.ring<=3 || n.id==='nox'){
+      const dur = (2.2 + rnd()*1.8).toFixed(2);
+      s += `<circle class="aura" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${ringR.toFixed(1)}" stroke="${c}" stroke-opacity="${(op*0.55).toFixed(2)}" stroke-width=".75">`;
+      s += `<animate attributeName="r" values="${ringR.toFixed(1)};${(ringR*1.6).toFixed(1)};${ringR.toFixed(1)}" dur="${dur}s" repeatCount="indefinite"/>`;
+      s += `<animate attributeName="stroke-opacity" values="${(op*0.55).toFixed(2)};0;${(op*0.55).toFixed(2)}" dur="${dur}s" repeatCount="indefinite"/></circle>`;
+    }
+    s += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="${c}" fill-opacity="${op.toFixed(2)}" filter="url(#bloom)"/>`;
+    if(n.id==='nox'){
+      s += `<circle cx="${x}" cy="${y}" r="7" fill="#ffffff"/>`;
+      s += `<circle cx="${x}" cy="${y}" r="14" fill="none" stroke="#ffffff" stroke-opacity=".55" stroke-width=".7"><animate attributeName="r" values="14;42;14" dur="3.4s" repeatCount="indefinite"/><animate attributeName="stroke-opacity" values=".55;0;.55" dur="3.4s" repeatCount="indefinite"/></circle>`;
+    }
+    s += `</g>`;
+  });
+  $node.innerHTML = s;
+}
+
+function renderLabels(){
+  let s='';
+  ALL.forEach(n=>{
+    if(!visible(n)||!n.label) return;
+    if(n.ring>3 && n.id!=='nox') return;
+    const [x,y]=nodePos(n);
+    const big = n.ring<=1 || n.id==='nox';
+    const isCore = n.id==='nox';
+    const yo = isCore ? -38 : n.ring===1 ? -16 : -12;
+    s += `<text class="lbl ${isCore?'lblCore':big?'lblBig':''}" x="${x.toFixed(1)}" y="${(y+yo).toFixed(1)}">${n.label}</text>`;
+  });
+  $lbl.innerHTML = s;
+}
+
+function renderPulses(){
+  let s='', idx=0;
+  EDGES.forEach((e)=>{
+    if(e.kind!=='hot' && e.kind!=='spoke') return;
+    if(e.kind==='spoke' && rnd()>0.55) return;
+    const a=lookup[e.a], b=lookup[e.b];
+    if(!a||!b||!visible(a)||!visible(b)) return;
+    const [ax,ay]=nodePos(a), [bx,by]=nodePos(b);
+    const dx=bx-ax, dy=by-ay, dist=Math.hypot(dx,dy);
+    if(dist<14) return;
+    const curveAmt = Math.min(36, dist*0.13);
+    const mx = (ax+bx)/2 + (-dy/dist)*curveAmt;
+    const my = (ay+by)/2 + ( dx/dist)*curveAmt;
+    const dur=(1.6+rnd()*2.4).toFixed(2);
+    const delay=(-rnd()*3).toFixed(2);
+    const c = e.kind==='hot' ? '#ff58c9' : '#5ee7ff';
+    const pid = 'pp'+(idx++);
+    s += `<path id="${pid}" d="M${ax} ${ay} Q${mx} ${my} ${bx} ${by}" fill="none" stroke="none"/>`;
+    s += `<circle class="pulse" r="2.6" fill="${c}" filter="url(#bloom)"><animateMotion dur="${dur}s" begin="${delay}s" repeatCount="indefinite"><mpath href="#${pid}"/></animateMotion></circle>`;
+    s += `<circle class="pulse" r="1.2" fill="#fff"><animateMotion dur="${dur}s" begin="${delay}s" repeatCount="indefinite"><mpath href="#${pid}"/></animateMotion></circle>`;
+  });
+  $pulse.innerHTML = s;
+}
+
+function renderSelection(){
+  if(!SELECTED_ID || !lookup[SELECTED_ID]){ $select.innerHTML=''; return; }
+  const n = lookup[SELECTED_ID];
+  if(!visible(n)){ $select.innerHTML=''; return; }
+  const [x,y] = nodePos(n);
+  const r = nodeSize(n);
+  const c = nodeColor(n);
+  const R1 = r + 5;
+  const R2 = r * 2.4 + 6;
+  let s = '';
+  s += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(R2*1.4).toFixed(1)}" fill="${c}" fill-opacity="0.06" filter="url(#bloomXL)"/>`;
+  s += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${R1.toFixed(1)}" fill="none" stroke="#ffffff" stroke-opacity="0.9" stroke-width="1.2">`;
+  s += `<animate attributeName="r" values="${R1.toFixed(1)};${(R1*1.8).toFixed(1)};${R1.toFixed(1)}" dur="2.4s" repeatCount="indefinite"/>`;
+  s += `<animate attributeName="stroke-opacity" values="0.9;0.15;0.9" dur="2.4s" repeatCount="indefinite"/></circle>`;
+  s += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${R2.toFixed(1)}" fill="none" stroke="${c}" stroke-opacity="0.95" stroke-width="1.4" stroke-dasharray="4 5">`;
+  s += `<animateTransform attributeName="transform" type="rotate" from="0 ${x.toFixed(1)} ${y.toFixed(1)}" to="360 ${x.toFixed(1)} ${y.toFixed(1)}" dur="7s" repeatCount="indefinite"/></circle>`;
+  $select.innerHTML = s;
+}
+
+function render(){
+  buildRings(); renderEdges(); renderNodes(); renderLabels(); renderPulses(); bindNodes(); renderSelection();
+  document.getElementById('ncLabel').textContent = ALL.filter(visible).length;
+  document.getElementById('ecLabel').textContent = EDGES.filter(e=>visible(lookup[e.a])&&visible(lookup[e.b])).length;
+  document.getElementById('rdrLabel').textContent = MODE==='lattice' ? 'SVG · lattice' : 'SVG · cloud';
+}
+
+const tip = document.getElementById('tip');
+function bindNodes(){
+  $node.querySelectorAll('.node').forEach(el=>{
+    el.onclick = ()=>{ const id=el.dataset.id; if(lookup[id]) selectNode(lookup[id]) };
+    el.onmouseenter = ()=>{ const n=lookup[el.dataset.id]; if(!n) return;
+      tip.textContent = (n.label||'·') + (n.label?' · ':'') + n.cat + (n.state? ' · '+n.state : '');
+      tip.style.opacity = 1; };
+    el.onmousemove = (ev)=>{ tip.style.left=(ev.clientX+12)+'px'; tip.style.top=(ev.clientY+12)+'px' };
+    el.onmouseleave = ()=>{ tip.style.opacity=0 };
+  });
+}
+
+function selectNode(n){
+  SELECTED_ID = n.id;
+  document.getElementById('detTitle').textContent = n.label || n.id;
+  document.getElementById('detCat').textContent = (n.cat||'').toUpperCase();
+  document.getElementById('detDesc').textContent = n.desc || `${n.label||n.id} · ${n.cat} layer entity · part of the Nox/Hermes neural mesh. Click another node to inspect connections.`;
+  document.getElementById('detV1').textContent = (n.state||'active').toUpperCase();
+  const cls1 = (n.state==='blocked'?'pink':n.state==='waiting'?'amber':n.state==='todo'?'amber':n.state==='active'?'cyan':'cyan');
+  const detV1 = document.getElementById('detV1'); detV1.className=cls1;
+  const links = EDGES.filter(e=>e.a===n.id||e.b===n.id);
+  document.getElementById('detV2').textContent = links.length;
+  document.getElementById('detV3').textContent = n.m?.uptime || n.m?.next || n.m?.last || n.m?.maxDD || n.m?.equity || (n.role||'node');
+  document.getElementById('detV4').textContent = n.m?.rate || n.m?.tasks || n.m?.facts || n.m?.files || n.m?.posts || n.m?.cmds || n.m?.books || n.m?.threads || n.m?.size || n.m?.sharpe || '—';
+  const linkedList = document.getElementById('linkedList');
+  const seen = new Set();
+  let h='';
+  links.forEach(e=>{
+    const o = e.a===n.id ? lookup[e.b] : lookup[e.a];
+    if(!o || seen.has(o.id)) return;
+    seen.add(o.id);
+    if(seen.size>14) return;
+    const c = nodeColor(o);
+    h += `<div class="linkedRow" data-id="${o.id}"><span class="lf"><span class="dotc" style="color:${c};background:${c}"></span><span>${o.label||o.id}</span></span><span class="tag">${o.cat}</span></div>`;
+  });
+  document.getElementById('lkCount').textContent = links.length+' links';
+  linkedList.innerHTML = h || '<div class="linkedRow"><span class="lf">no direct connections</span></div>';
+  linkedList.querySelectorAll('.linkedRow').forEach(row=>{
+    row.onclick = ()=>{ const o=lookup[row.dataset.id]; if(o) selectNode(o) };
+  });
+  renderSelection();
+}
+
+document.getElementById('latticeBtn').onclick = ()=>{
+  MODE='lattice';
+  document.getElementById('latticeBtn').classList.add('active');
+  document.getElementById('cloudBtn').classList.remove('active');
+  document.getElementById('modeLabel').textContent='LATTICE';
+  render();
+};
+document.getElementById('cloudBtn').onclick = ()=>{
+  MODE='cloud';
+  document.getElementById('cloudBtn').classList.add('active');
+  document.getElementById('latticeBtn').classList.remove('active');
+  document.getElementById('modeLabel').textContent='CLOUD';
+  render();
+};
+document.querySelectorAll('.chip').forEach(c=>{
+  c.onclick = ()=>{
+    document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+    c.classList.add('active');
+    FILTER = c.dataset.filter; render();
+  };
+});
+document.querySelectorAll('.qItem').forEach(q=>{
+  q.onclick = ()=>{ const id=q.dataset.id; if(lookup[id]) selectNode(lookup[id]) };
+});
+
+window.addEventListener('keydown', (e)=>{
+  if(e.target && (e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')) return;
+  if(e.key==='l'||e.key==='L'){ document.getElementById('latticeBtn').click(); }
+  else if(e.key==='c'||e.key==='C'){ document.getElementById('cloudBtn').click(); }
+  else if(e.key==='Escape'){ SELECTED_ID=null; renderSelection(); }
+});
+
+function spark(id, n){
+  const el = document.getElementById(id); let h='';
+  for(let i=0;i<n;i++){
+    const v = 30 + Math.round(Math.random()*70);
+    h += `<div class="b" style="height:${v}%;opacity:${(0.4+Math.random()*0.55).toFixed(2)}"></div>`;
+  }
+  el.innerHTML = h;
+}
+spark('sp1',22); spark('sp2',22); spark('sp3',22); spark('sp4',22);
+
+document.getElementById('kpiNodes').textContent = ALL.length;
+
+render();
+selectNode(lookup.nox);
+
+// ====== Background canvas: nebula + drifting dust ======
+const $bg = document.getElementById('bg');
+const ctx = $bg.getContext('2d');
+function resize(){
+  $bg.width = innerWidth * devicePixelRatio;
+  $bg.height = innerHeight * devicePixelRatio;
+  $bg.style.width = innerWidth+'px';
+  $bg.style.height = innerHeight+'px';
+}
+resize(); addEventListener('resize', resize);
+
+const DUST_N = 200;
+const bdust = [];
+for(let i=0;i<DUST_N;i++){
+  bdust.push({
+    x: Math.random()*innerWidth, y: Math.random()*innerHeight,
+    r: 0.6 + Math.random()*1.8,
+    vx: (Math.random()-.5)*0.10, vy: (Math.random()-.5)*0.05,
+    c: ['#5ee7ff','#9461ff','#ff58c9','#ffc857','#5b86ff','#56fff0'][Math.floor(Math.random()*6)],
+    a: 0.10 + Math.random()*0.45,
+    ph: Math.random()*Math.PI*2,
+  });
+}
+
+function tick(){
+  const W2=innerWidth, H2=innerHeight, D=devicePixelRatio;
+  ctx.setTransform(D,0,0,D,0,0);
+  ctx.clearRect(0,0,W2,H2);
+  const t = Date.now()/9000;
+  for(let i=0;i<5;i++){
+    const a = t + i*1.7;
+    const x = W2*(0.5 + Math.cos(a)*0.35);
+    const y = H2*(0.5 + Math.sin(a*1.2)*0.30);
+    const g = ctx.createRadialGradient(x,y,0,x,y,300);
+    const col = ['rgba(94,231,255,.10)','rgba(155,92,255,.10)','rgba(255,90,180,.08)','rgba(91,134,255,.10)','rgba(86,255,240,.07)'][i];
+    g.addColorStop(0, col); g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(0,0,W2,H2);
+  }
+  const now = Date.now();
+  bdust.forEach(p=>{
+    p.x += p.vx; p.y += p.vy;
+    if(p.x<-10) p.x=W2+10; if(p.x>W2+10) p.x=-10;
+    if(p.y<-10) p.y=H2+10; if(p.y>H2+10) p.y=-10;
+    ctx.beginPath();
+    ctx.fillStyle = p.c;
+    ctx.globalAlpha = p.a * (0.55 + 0.45*Math.sin(now/720 + p.ph));
+    ctx.shadowBlur = 8; ctx.shadowColor = p.c;
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+    ctx.fill();
+  });
+  ctx.globalAlpha=1; ctx.shadowBlur=0;
+  requestAnimationFrame(tick);
+}
+tick();
+
+// ====== FPS counter ======
+let fpsLast=performance.now(), fpsFrames=0;
+function fpsTick(){
+  fpsFrames++;
+  const now = performance.now();
+  if(now - fpsLast > 1000){
+    document.getElementById('fpsLabel').textContent = fpsFrames;
+    fpsFrames = 0; fpsLast = now;
+  }
+  requestAnimationFrame(fpsTick);
+}
+fpsTick();
+
+// ====== Live pulse feed ======
+const feedTemplates = [
+  ['',     'Hermes context gateway · query batched (+128)', 'core://hermes'],
+  ['amber','Researcher · YouTube triage paused on /KryptoLab','agent://researcher'],
+  ['green','Paper Risk Engine · margin OK · 38% util',     'risk://paper-risk'],
+  ['',     'Daily Markov · BTCUSDT regime probs updated',  'cron://daily-markov'],
+  ['pink', 'Telegram · /status invoked by Anton',          'route://telegram'],
+  ['',     'Fact Store · 12 new facts indexed',            'memory://facts'],
+  ['amber','Coder · waiting on Bollinger VWAP Mom v0 spec','agent://coder'],
+  ['green','Go/No-Go · RegimeGatedCombo passed (sharpe 1.42)', 'risk://gate'],
+  ['',     'Markov Engine · 24 tickers re-scored',         'trading://markov'],
+];
+let feedIdx = 0;
+setInterval(()=>{
+  const t = feedTemplates[feedIdx++ % feedTemplates.length];
+  const feed = document.getElementById('feed');
+  const el = document.createElement('div');
+  el.className = 'feedItem ' + t[0];
+  el.innerHTML = `${t[1]}<small>${t[2]} · just now</small>`;
+  feed.insertBefore(el, feed.firstChild);
+  while(feed.children.length>10) feed.removeChild(feed.lastChild);
+}, 6500);
+
+})();
+</script>
+</body>
+</html>
