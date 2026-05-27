@@ -345,6 +345,7 @@ def run_backtest(config: BacktestConfig) -> BacktestResult:
     reset_ledger()
 
     regime_counts: dict[str, int] = {"low": 0, "neutral": 0, "high": 0}
+    trade_meta: dict[str, dict[str, str]] = {}  # pos_id -> {regime, selected_strategy}
     equity_curve: list[float] = [1.0]
     capital = initial_capital
 
@@ -388,7 +389,7 @@ def run_backtest(config: BacktestConfig) -> BacktestResult:
             regime_counts[regime] = regime_counts.get(regime, 0) + 1
 
             selected = pred["selected_strategy"]
-            if selected == "none" or selected == "none":
+            if selected == "none":
                 # No position — capital unchanged
                 equity_curve.append(equity_curve[-1])
                 continue
@@ -419,6 +420,9 @@ def run_backtest(config: BacktestConfig) -> BacktestResult:
 
             exit_dt = df.index[i + 1] if i + 1 < len(df) else dt
             pnl_bps = close_position(pos_id, exit_price, exit_dt)
+
+            # Log regime/strategy for this trade (to populate Trade fields later)
+            trade_meta[pos_id] = {"regime": regime, "selected_strategy": selected}
 
             # Update capital with PnL
             pnl_return = pnl_bps / 10_000.0
@@ -454,8 +458,8 @@ def run_backtest(config: BacktestConfig) -> BacktestResult:
             pnl_bps=p.pnl_bps or 0.0,
             gross_return=(p.pnl_bps or 0.0) / 10_000.0,
             cost_bps=p.cost_bps,
-            regime_at_entry="unknown",
-            selected_strategy="combo",
+            regime_at_entry=trade_meta.get(p.position_id, {}).get("regime", "unknown"),
+            selected_strategy=trade_meta.get(p.position_id, {}).get("selected_strategy", "combo"),
         )
         for p in closed
     ]

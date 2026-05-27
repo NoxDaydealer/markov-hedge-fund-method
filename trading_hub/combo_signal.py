@@ -49,7 +49,8 @@ def build_regime_gated_combo_signal(
     result.loc[rev_mask] = rev.loc[rev_mask]
 
     # Rule 3: momentum regime → momentum_signal
-    # Rule 5: reversion wins on collision — apply momentum only where reversion didn't fire
+    # Note: rev_mask and mom_mask are regime-disjoint (mean_reversion vs momentum),
+    # so structurally no collision can occur on a given bar.
     mom_mask = allowed & regime.eq(config.momentum_regime)
     result.loc[mom_mask] = mom.loc[mom_mask]
 
