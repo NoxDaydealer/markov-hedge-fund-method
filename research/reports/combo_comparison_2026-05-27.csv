@@ -1,0 +1,12 @@
+strategy,net_pnl,max_drawdown,fee_to_gross_profit,trades,beats_random,sharpe_ratio,win_rate,gate
+vwap_reversion_baseline,0.0,0.0,inf,0,True,0.0,0.0,insufficient_data
+vwap_rsi_markov_neutral,0.0,0.0,inf,0,True,0.0,0.0,insufficient_data
+vwap_rsi_markov_contrarian,0.0,0.0,inf,0,True,0.0,0.0,insufficient_data
+bollinger_vwap_no_shorts,-0.0014229033651562695,-0.0014229033651562695,6.135043830317558,1,True,-13.238520290166793,0.0,insufficient_data
+bollinger_vwap_shorts,-0.03082352960291701,-0.03082352960291701,28.95508816385472,15,False,-50.08001551463088,0.0,insufficient_data
+combo_fib_liquidity,0.0,0.0,inf,0,True,0.0,0.0,insufficient_data
+regime_gated_combo,-0.0014229033651562695,-0.0014229033651562695,6.135043830317558,1,True,-13.238520290166793,0.0,insufficient_data
+no_trade,0.0,0.0,inf,0,True,0.0,0.0,insufficient_data
+buy_hold,-0.924025161382833,-0.924025161382833,8.948258844987803,1499,False,-670.0248008650851,0.0,no_go
+random_same_freq,-0.0058833205026981306,-0.0058833205026981306,inf,3,False,-22.920592638647015,0.0,insufficient_data
+naive_vwap,-0.9172362451630531,-0.9172362451630531,8.41209170964373,1469,False,-656.1141729842819,0.0,no_go
