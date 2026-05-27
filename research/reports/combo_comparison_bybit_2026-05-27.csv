@@ -1,0 +1,15 @@
+strategy,symbol,test_net_pnl,test_sharpe,test_trades,test_win_rate,test_max_drawdown,fee_to_gross_profit,gate
+vwap_rsi_reversion_off,BTCUSDT,-0.006951,-13.898793,7,0.285714,-0.006951,5.864136,no_go
+vwap_rsi_reversion_off,ETHUSDT,0.002008,1.937250,12,0.500000,-0.005453,0.878528,go
+vwap_rsi_reversion_neutral,BTCUSDT,-0.003162,-9.628920,5,0.400000,-0.003598,2.114501,no_go
+vwap_rsi_reversion_neutral,ETHUSDT,-0.001093,-2.635557,5,0.400000,-0.003462,1.222354,no_go
+vwap_rsi_reversion_contrarian,BTCUSDT,-0.001242,-3.186443,6,0.500000,-0.003253,1.208000,no_go
+vwap_rsi_reversion_contrarian,ETHUSDT,-0.000297,-0.579380,6,0.500000,-0.003462,1.042957,no_go
+bb_vwap_momentum_no_shorts,BTCUSDT,-0.005893,-17.982519,9,0.222222,-0.006783,2.201922,no_go
+bb_vwap_momentum_no_shorts,ETHUSDT,-0.022190,-35.346113,24,0.125000,-0.022190,4.472641,no_go
+bb_vwap_momentum_shorts,BTCUSDT,-0.041406,-53.740751,40,0.050000,-0.041406,8.200683,no_go
+bb_vwap_momentum_shorts,ETHUSDT,-0.047625,-52.417361,42,0.071429,-0.047625,30.166116,no_go
+buy_hold,BTCUSDT,-0.003823,nan,1,nan,-0.003823,0.000000,no_go
+buy_hold,ETHUSDT,-0.013620,nan,1,nan,-0.013620,0.000000,no_go
+no_trade,BTCUSDT,0.000000,0.000000,0,0.000000,0.000000,0.000000,insufficient_data
+no_trade,ETHUSDT,0.000000,0.000000,0,0.000000,0.000000,0.000000,insufficient_data
