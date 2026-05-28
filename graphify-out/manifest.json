@@ -203,5 +203,290 @@
     "mtime": 1779487405.1562583,
     "ast_hash": "8196a13d22cfec652654774a51652128",
     "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_cost_model.py": {
+    "mtime": 1779822162.127819,
+    "ast_hash": "b925d87ce848937ce6a43b44f8ce300b",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_go_no_go_gate.py": {
+    "mtime": 1779710466.7011735,
+    "ast_hash": "7a6e9b6a0655c4f4687c8ed0121ee67b",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_pit_data_pipeline.py": {
+    "mtime": 1779818222.4540854,
+    "ast_hash": "8359e80e3ee2742801b1df3e4954c724",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_ledger.py": {
+    "mtime": 1779826092.5231953,
+    "ast_hash": "ec2bb8e3fff0492969f2ea9d9858cae2",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_sweeps.py": {
+    "mtime": 1779709076.159503,
+    "ast_hash": "6c2d437b464f375c88298d1e20dafd8d",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_combo_signal.py": {
+    "mtime": 1779709686.4395313,
+    "ast_hash": "ce052c04b6151509f195ebdb8f9ed497",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_backtest_runner.py": {
+    "mtime": 1779826334.8030384,
+    "ast_hash": "ea86a0f68689b687ef9de54ec821f8a2",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_combo_comparison_report.py": {
+    "mtime": 1779709972.846498,
+    "ast_hash": "64ac74c061d4f32ff399caa5eec88e83",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_parameter_sweep.py": {
+    "mtime": 1779708251.4687698,
+    "ast_hash": "8acb6d139648a8ecb566dfb42d482ec0",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/tests/test_combination_runner.py": {
+    "mtime": 1779707501.777084,
+    "ast_hash": "e06e5f0c992dd8da92780d7dcd97a4bc",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/combo_comparison_report.py": {
+    "mtime": 1779710448.369111,
+    "ast_hash": "b14067117a446349fe034d449d98a27f",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/parameter_sweep.py": {
+    "mtime": 1779708291.5789106,
+    "ast_hash": "8bec5ef20b3b8a3ed334e1f187adb9c9",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/backtest_runner.py": {
+    "mtime": 1779826304.666934,
+    "ast_hash": "ade68dfb7272e40085d24564ae082c98",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/ledger.py": {
+    "mtime": 1779825549.0712342,
+    "ast_hash": "90e46b5f7940677bba92e91188193627",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/combination_runner.py": {
+    "mtime": 1779707492.1050484,
+    "ast_hash": "d2c970f8e684ab7fbee43db7dab16718",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/go_no_go_gate.py": {
+    "mtime": 1779710711.7779586,
+    "ast_hash": "defe90bce30a35ecd5c5870560b2fcfd",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/costs.py": {
+    "mtime": 1779821732.483177,
+    "ast_hash": "0b5f2a7aafc504d63217a3fdce63ae1e",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/combo_signal.py": {
+    "mtime": 1779709663.9664557,
+    "ast_hash": "10512f68c52c76453a361f5f7cbae7c1",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/sweeps/_common.py": {
+    "mtime": 1779709317.8352988,
+    "ast_hash": "8ca24262b3dafb3aff187ac9cfc5bf87",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/sweeps/bollinger_vwap_momentum.py": {
+    "mtime": 1779709318.1632998,
+    "ast_hash": "b9029ce91efc8d36873c39da7118a0a0",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/sweeps/__init__.py": {
+    "mtime": 1779709048.9834144,
+    "ast_hash": "5835d6e065578ec42bf810c08baa8059",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/sweeps/vwap_volume_rsi_reversion.py": {
+    "mtime": 1779709318.0212994,
+    "ast_hash": "12978bd07484318a3cec81241ffd5d91",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/data/__init__.py": {
+    "mtime": 1779817996.844528,
+    "ast_hash": "5a1310bfe210cca5f141d8ab77d0b762",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/data/validators.py": {
+    "mtime": 1779818099.917774,
+    "ast_hash": "8c7158df306b95a3bb5494170b1d0659",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/trading_hub/data/pit_store.py": {
+    "mtime": 1779818163.2839327,
+    "ast_hash": "078984815f74bbd9a63f8c0833c8c1ad",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/sketches/index.html": {
+    "mtime": 1779743951.679462,
+    "ast_hash": "61f86e8c752f435c7fb9f339f825510b",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/sketches/002-data-cloud-particle-map/README.md": {
+    "mtime": 1779742421.204279,
+    "ast_hash": "e8c4cf8d2aa8c484a429dae7bba394ce",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/sketches/002-data-cloud-particle-map/index.html": {
+    "mtime": 1779742421.0742784,
+    "ast_hash": "6531bc1bc50dcacdff41ceb1402c4f54",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/sketches/001-neural-brain-map/README.md": {
+    "mtime": 1779742420.9482777,
+    "ast_hash": "610908c9968c6a9ce91f91dd1398df7f",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/sketches/001-neural-brain-map/index.html": {
+    "mtime": 1779742706.6575058,
+    "ast_hash": "3f5ea7a50e2d0e34f21671f9ec91e3b6",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/sketches/003-command-center-hybrid/README.md": {
+    "mtime": 1779742421.4002798,
+    "ast_hash": "1659b8f8bab47384c2caff1425d84bb7",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/sketches/003-command-center-hybrid/index.html": {
+    "mtime": 1779742706.3195045,
+    "ast_hash": "95536c786ce03b2386371da3b9391056",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/sketches/004-neurocloud-command-center/README.md": {
+    "mtime": 1779743951.6424618,
+    "ast_hash": "acfa3e6b28a578286957662bb78f5a50",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/sketches/004-neurocloud-command-center/index.html": {
+    "mtime": 1779744092.9506898,
+    "ast_hash": "fc00d7a80cf720728748c806c911b522",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/sketches/006-opus-jarvis-reference-neural-cloud/README.md": {
+    "mtime": 1779763525.3766935,
+    "ast_hash": "8b9a54230e806b0a3b1ac8db1fb89e32",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/sketches/006-opus-jarvis-reference-neural-cloud/index.html": {
+    "mtime": 1779763719.4873288,
+    "ast_hash": "93061db7addb8599e23c8233e702e744",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/sketches/005-jarvis-reference-neural-cloud/README.md": {
+    "mtime": 1779745814.405694,
+    "ast_hash": "5b59e899a29b3a67e43ae4031130b1b7",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/sketches/005-jarvis-reference-neural-cloud/index.html": {
+    "mtime": 1779745814.3036935,
+    "ast_hash": "061d776bd4bfe16e7fda4b407e8d7748",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/prompts/20260526_phase2_opus_plan_review.md": {
+    "mtime": 1779817745.5930128,
+    "ast_hash": "a92768dcbf15c682ab4ba439d1624b2a",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/prompts/20260526_claude_live_steering_only_one_card.md": {
+    "mtime": 1779817744.4570107,
+    "ast_hash": "bad4dceb409898466a60269365fc6242",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/prompts/20260526_phase4b_opus_card_b_review.md": {
+    "mtime": 1779819332.2506032,
+    "ast_hash": "64f0068590b87c42c5b3ca92f6ed7a7d",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/prompts/20260526_phase4c_card_c_ledger.md": {
+    "mtime": 1779825227.2710817,
+    "ast_hash": "64a16a9e1aca381ae791d5e741f4c992",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/prompts/20260526_170432_opus_books_ultraplan_prompt.md": {
+    "mtime": 1779815097.3084986,
+    "ast_hash": "54c8f1cb3e9c4a53e3fb3ae8bcbe534a",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/prompts/20260526_phase4c_fix_card_b_opus_review.md": {
+    "mtime": 1779821670.5579336,
+    "ast_hash": "be82ec0a1d9b459a21098dd8fa6001e5",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/prompts/20260526_phase4d_card_d_regime_combo.md": {
+    "mtime": 1779825936.6246452,
+    "ast_hash": "400c1724508da1fe333bd8d76a6dfd15",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/prompts/20260526_create_kanban_card_b_only.md": {
+    "mtime": 1779819785.761698,
+    "ast_hash": "6c534fe6cb7f346ef8cecbc875aab582",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/prompts/20260526_phase4_sonnet_card_b_cost_slippage.md": {
+    "mtime": 1779819319.2425358,
+    "ast_hash": "68179580569685b3e01021f778a3b74d",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/prompts/20260526_phase1_sonnet_books_plan_trimmed.md": {
+    "mtime": 1779816986.5479913,
+    "ast_hash": "5cae0f64a71beec57285057d39a438ae",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/prompts/20260526_phase3_sonnet_first_card_implementation.md": {
+    "mtime": 1779817745.5930128,
+    "ast_hash": "1c0609d19ef6e192ef23f88c00a41816",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/plans/20260526_phase2_opus_plan_review.md": {
+    "mtime": 1779817622.7928205,
+    "ast_hash": "691728fa3e6e0210f5f0133095d97347",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/plans/20260526_phase1_books_to_paper_trading_plan.md": {
+    "mtime": 1779817329.682606,
+    "ast_hash": "72bccc9077c3e82659b59a6601332ab5",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/plans/obsidian-vault-second-brain-integration.md": {
+    "mtime": 1779741271.4767933,
+    "ast_hash": "a416196cef6b70eb582ae41b724f4c46",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/plans/20260526_phase4b_opus_card_b_review.md": {
+    "mtime": 1779821623.6927478,
+    "ast_hash": "f69c004eb87bf8dadd8784d9b341954e",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/plans/trading-hub-neural-dashboard-backlog.md": {
+    "mtime": 1779740974.3618615,
+    "ast_hash": "738c82d945cfa3f45014a55e5e21fa8d",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/plans/2026-05-25_claude-ultraplan-strategy-combination-roadmap.md": {
+    "mtime": 1779702217.2497184,
+    "ast_hash": "6da4a8693b86541ca5dcd7ffc8a0c082",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/plans/20260526_170432_opus_books_ultraplan.md": {
+    "mtime": 1779815893.4126277,
+    "ast_hash": "698e4c25983a1a4820f7971519daa187",
+    "semantic_hash": ""
+  },
+  "/root/trading/markov-strategy/.hermes/plans/2026-05-25_trading-hub-book-ultraplan.md": {
+    "mtime": 1779724346.4094877,
+    "ast_hash": "becba2a97ab59b78d00e4c1835274d55",
+    "semantic_hash": ""
   }
 }
