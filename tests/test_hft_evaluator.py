@@ -112,6 +112,27 @@ def test_evaluate_with_baselines_reports_pnl_by_regime_and_required_metrics():
     assert {'no_trade', 'buy_hold', 'random_same_frequency', 'naive_vwap_reversion'}.issubset(results)
 
 
+def test_buy_hold_baseline_is_one_full_period_trade_not_rebalanced_every_bar():
+    frame = hft_fixture(80)
+    signal = pd.Series(0, index=frame.index)
+    signal.iloc[5::10] = 1
+
+    results = evaluate_with_baselines(
+        frame,
+        signal,
+        name='candidate',
+        cost_model=CostModel(taker_fee_bps=0.0, spread_bps=0.0, slippage_bps=0.0),
+        execution=ExecutionAssumptions(latency_bars=0, hold_bars=1),
+    )
+
+    buy_hold = results['buy_hold']
+    expected = frame['open'].iloc[-1] / frame['open'].iloc[0] - 1.0
+    assert buy_hold.metrics['trades'] == 1
+    assert buy_hold.trades.loc[0, 'entry_time'] == frame.index[0]
+    assert buy_hold.trades.loc[0, 'exit_time'] == frame.index[-1]
+    assert buy_hold.metrics['net_pnl'] == pytest.approx(expected)
+
+
 def test_walk_forward_evaluate_creates_train_validation_test_folds_with_test_baselines():
     frame = hft_fixture(90)
     signal = pd.Series(0, index=frame.index)

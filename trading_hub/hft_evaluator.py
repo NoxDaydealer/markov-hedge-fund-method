@@ -295,6 +295,45 @@ def build_baseline_signals(
     return baselines
 
 
+def evaluate_baseline_signal(
+    data: pd.DataFrame,
+    baseline_name: str,
+    baseline_signal: pd.Series,
+    *,
+    cost_model: CostModel | None = None,
+    execution: ExecutionAssumptions | None = None,
+    constraints: TradeConstraints | None = None,
+    regime: pd.Series | None = None,
+    periods_per_year: int = 365 * 24 * 60,
+) -> EvaluationResult:
+    """Evaluate a named baseline with semantics that match its label.
+
+    In particular, ``buy_hold`` is a single full-period long trade, not the
+    default intraday evaluator's repeated one-bar re-entry caused by a persistent
+    ``+1`` signal. Other baselines keep the caller's execution assumptions so
+    they remain comparable to the candidate strategy.
+    """
+
+    frame = _load_ohlcv(data)
+    baseline_execution = execution
+    if baseline_name == 'buy_hold':
+        baseline_execution = ExecutionAssumptions(
+            latency_bars=0,
+            hold_bars=max(1, len(frame) - 1),
+        )
+
+    return evaluate_intraday_strategy(
+        frame,
+        baseline_signal,
+        name=baseline_name,
+        cost_model=cost_model,
+        execution=baseline_execution,
+        constraints=constraints,
+        regime=regime,
+        periods_per_year=periods_per_year,
+    )
+
+
 def evaluate_with_baselines(
     data: pd.DataFrame,
     signal: pd.Series,
@@ -320,10 +359,10 @@ def evaluate_with_baselines(
         )
     }
     for baseline_name, baseline_signal in build_baseline_signals(data, signal, seed=random_seed).items():
-        results[baseline_name] = evaluate_intraday_strategy(
+        results[baseline_name] = evaluate_baseline_signal(
             data,
+            baseline_name,
             baseline_signal,
-            name=baseline_name,
             cost_model=cost_model,
             execution=execution,
             constraints=constraints,

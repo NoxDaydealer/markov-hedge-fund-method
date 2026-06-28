@@ -21,6 +21,7 @@ from trading_hub.go_no_go_gate import add_gate_column_to_results
 from trading_hub.hft_evaluator import (
     EvaluationResult,
     build_baseline_signals,
+    evaluate_baseline_signal,
     evaluate_intraday_strategy,
 )
 from trading_hub.strategies.bollinger_vwap_momentum import BollingerVwapMomentumAdapter
@@ -167,7 +168,7 @@ def run_combo_comparison(ohlcv: pd.DataFrame, date_str: str) -> list[dict]:
     baseline_results: dict[str, EvaluationResult] = {}
     for bname, bsig in baseline_signals.items():
         try:
-            baseline_results[bname] = evaluate_intraday_strategy(ohlcv, bsig, name=bname)
+            baseline_results[bname] = evaluate_baseline_signal(ohlcv, bname, bsig)
         except Exception as exc:
             warnings.warn(f'[combo_comparison] baseline {bname} evaluation failed: {exc}')
 
